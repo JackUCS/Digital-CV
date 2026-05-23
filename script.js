@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.textContent = '❌ Hide screenshot';
         } else {
           targetDiv.style.display = 'none';
-          btn.textContent = '🖼️ Show screenshot';
+          btn.textContent = '📸 Show screenshot';
         }
       }
     });

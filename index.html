@@ -6,6 +6,9 @@
   <title>Jack – Digital CV</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 </head>
 <body>
 <div class="container">
@@ -87,7 +90,7 @@
             <div class="tech-stack">HTML5, CSS3, JavaScript, Railway, Namecheap, DNS (CNAME, TXT, ALIAS)</div>
             <div>Designed and developed a responsive, mobile‑first CV website from scratch. Implemented a modern UI with flexbox layouts, skill tags, dynamic copyright year via JavaScript, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) using ALIAS and TXT verification records, and resolved DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
             <div class="button-group">
-              <a href="https://jackcv.xyz" class="btn-view" target="_blank">🌍 Visit Live Site</a>
+              <a href="https://jackcv.xyz" class="btn-view" target="_blank">🌍 Visit Live Site (You are here)</a>
               <a href="https://github.com/JackUCS/Digital-CV" class="btn-view" target="_blank">🦑 GitHub Repo</a>
             </div>
           </div>
@@ -100,7 +103,7 @@
           <div class="button-group">
             <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank">🦑 Public Interface</a>
             <a href="https://github.com/JackUCS/RBLXMonitoringSelf" class="btn-view" target="_blank">🦑 Bot using account tokens</a>
-            <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql">🖼️ Screenshots & further explanation</button>
+            <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql">📸 Screenshots & Explanation</button>
           </div>
           <!-- Hidden screenshot container with multiple images -->
           <div id="screenshot-cloudsql" class="screenshot-container" style="display: none; margin-top: 1rem;">
@@ -125,6 +128,13 @@
             <div class="button-group">
               <a href="assignments/SCDV42_CW2_JEF25003751_Jack_Jeffery_Web 1.docx" class="btn-view" target="_blank">📄 View Assignment (PDF)</a>
               <a href="https://github.com/JackUCS/UBC-Assignment" class="btn-view" target="_blank">🦑 GitHub Repo</a>
+              <button class="btn-view toggle-screenshot-btn" data-target="screenshot-ubc">📸 Show Screenshot</button>
+            </div>
+            <!-- Hidden screenshot container -->
+            <div id="screenshot-ubc" class="screenshot-container" style="display: none; margin-top: 1rem;">
+              <img src="images/Desktop showcase.png" alt="UBC website desktop view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
+              <img src="images/MOBILE SHOWCASE.png" alt="UBC website mobile view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Desktop and mobile views of the redesigned site, with light and darkmode counterparts.</p>
             </div>
           </div>
 
@@ -145,6 +155,12 @@
             <div>Designed secure network with VLAN segmentation, site‑to‑site IPsec VPN, and router‑on‑a‑stick. Chose OSPF over RIP for faster convergence.</div>
             <div class="button-group">
               <a href="assignments/SCDV44_CW2_JEF25003751_Jack_Jeffery_Networking 1.docx" class="btn-view" target="_blank">📄 View Assignment (PDF)</a>
+              <button class="btn-view toggle-screenshot-btn" data-target="screenshot-dropship">📸 Show Network Diagram</button>
+            </div>
+            <!-- Hidden screenshot container -->
+            <div id="screenshot-dropship" class="screenshot-container" style="display: none; margin-top: 1rem;">
+              <img src="images/network diagram.png" alt="Dropship network topology" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Packet Tracer network diagram showing VLAN segmentation and VPN tunnel.</p>
             </div>
           </div>
 
