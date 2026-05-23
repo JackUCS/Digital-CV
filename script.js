@@ -1,4 +1,4 @@
-// script.js – lightweight enhancements for Jack Jeffery's CV
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Dynamic copyright year
@@ -27,27 +27,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Optional: Add a tiny "copy email" if you ever add email – not needed now.
-  //    Instead, just a passive console log to show you're JS-aware.
-  console.log("Pro tip: You can reach me via GitHub – links are above.");
-});
-
-// Toggle screenshot visibility
-document.addEventListener('DOMContentLoaded', () => {
+  // 4. Toggle screenshot/video visibility – preserving original button text
   const toggleButtons = document.querySelectorAll('.toggle-screenshot-btn');
   toggleButtons.forEach(btn => {
+    // Store the original button text (e.g., "▶️ Show video demo")
+    const originalText = btn.textContent;
+    btn.setAttribute('data-original-text', originalText);
+
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
       const targetDiv = document.getElementById(targetId);
       if (targetDiv) {
         if (targetDiv.style.display === 'none') {
           targetDiv.style.display = 'block';
-          btn.textContent = '❌ Hide screenshot';
+          btn.textContent = '❌ Hide content';
         } else {
           targetDiv.style.display = 'none';
-          btn.textContent = '📸 Show screenshot';
+          btn.textContent = originalText;  // Restore the exact original text
         }
       }
     });
   });
+
+  // 5. Lightbox / image expand on click (circular for headshot, rectangular for others)
+  const modal = document.createElement('div');
+  modal.id = 'lightbox-modal';
+  modal.style.cssText = `
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+  `;
+  const modalImg = document.createElement('img');
+  modal.appendChild(modalImg);
+  document.body.appendChild(modal);
+
+  const setModalStyle = (isHeadshot) => {
+    if (isHeadshot) {
+      modalImg.style.cssText = `
+        width: min(80vh, 80vw);
+        height: min(80vh, 80vw);
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+    } else {
+      modalImg.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+    }
+  };
+
+  modal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    modalImg.src = '';
+  });
+
+  document.querySelectorAll('.screenshot-container img').forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalImg.src = img.src;
+      setModalStyle(false);
+      modal.style.display = 'flex';
+    });
+  });
+
+  const headshot = document.querySelector('.headshot');
+  if (headshot) {
+    headshot.style.cursor = 'pointer';
+    headshot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalImg.src = headshot.src;
+      setModalStyle(true);
+      modal.style.display = 'flex';
+    });
+  }
+
+  // 6. Final console hint
+  console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
