@@ -290,3 +290,12 @@ ul li::before {
     margin-top: 0.5rem;
   }
 }
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-top: -2px;
+  margin-right: 3px;
+  display: inline-block;
+}
