@@ -31,3 +31,23 @@ document.addEventListener('DOMContentLoaded', () => {
   //    Instead, just a passive console log to show you're JS-aware.
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
+
+// Toggle screenshot visibility
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButtons = document.querySelectorAll('.toggle-screenshot-btn');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const targetDiv = document.getElementById(targetId);
+      if (targetDiv) {
+        if (targetDiv.style.display === 'none') {
+          targetDiv.style.display = 'block';
+          btn.textContent = '❌ Hide screenshot';
+        } else {
+          targetDiv.style.display = 'none';
+          btn.textContent = '🖼️ Show screenshot';
+        }
+      }
+    });
+  });
+});
