@@ -23,13 +23,12 @@
   </div>
   <div class="cv-main">
     <div class="two-col">
-      <!-- LEFT COLUMN (unchanged) -->
+      <!-- LEFT COLUMN -->
       <div class="left-col">
         <div class="section">
           <div class="section-title">Profile</div>
           <p>Motivated first-year Computing student with hands‑on experience in front-end and back-end development, Data science, Cybersecurity, and Networking. <br> <br> Passionate about building secure, user‑friendly applications and extracting insights from data. Seeking a placement or graduate role in data analysis, or IT security & Networking.</p>
         </div>
-
         <div class="section">
           <div class="section-title">Technical Skills</div>
           <div>
@@ -50,7 +49,6 @@
             <span class="skill-tag">OWASP</span>
           </div>
         </div>
-
         <div class="section">
           <div class="section-title">Achievements & Certifications</div>
           <ul>
@@ -60,7 +58,6 @@
             <li>Designed and deployed a Discord bot that systematically collected over 4,000 records of structured profile data (Discord ID, Roblox ID, username, confidence score) into a cloud‑hosted MySQL database</li>
           </ul>
         </div>
-
         <div class="section">
           <div class="section-title">Links</div>
           <p>🌐 <a href="https://Github.com/JackUCS" target="_blank" class="custom-link">Github.com/JackUCS</a></p>
@@ -84,7 +81,7 @@
         <div class="section">
           <div class="section-title">Key Projects & Assignments</div>
 
-          <!-- 1. Personal Portfolio Website & Cloud Deployment (Independent) -->
+          <!-- 1. Personal Portfolio Website & Cloud Deployment -->
           <div class="project-item">
             <div class="project-title">🌐 Personal Portfolio Website & Cloud Deployment (Independent)</div>
             <div class="tech-stack">HTML5, CSS3, JavaScript, Railway, Namecheap, DNS (CNAME, TXT, ALIAS)</div>
@@ -95,49 +92,40 @@
             </div>
           </div>
 
-<!-- Cloud MySQL Database (Independent) -->
-        <div class="project-item">
-          <div class="project-title">☁️ Cloud MySQL Database (Independent)</div>
-          <div class="tech-stack">MySQL, Railway (TCP proxy), Git, SQLTools</div>
-          <div>Deployed a relational database on Railway for Roblox profiles. Wrote optimised queries for duplicate detection and confidence scoring. systematically collected over 4,000 records of structured profile data.</div>
-          <div class="button-group">
-            <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank">🦑 Public Interface</a>
-            <a href="https://github.com/JackUCS/RBLXMonitoringSelf" class="btn-view" target="_blank">🦑 Bot using account tokens</a>
-            <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql">📸 Screenshots & Explanation</button>
-          </div>
-          <!-- Hidden screenshot container with multiple images -->
-          <div id="screenshot-cloudsql" class="screenshot-container" style="display: none; margin-top: 1rem;">
-            <img src="images/SQLScreenshot.png" alt="Database schema" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
-            <p style="font-size: 0.75rem; color: #5b6e8c; margin-bottom: 0.5rem;">Screenshot of database records</p>
-            <img src="images/Result.png" alt="Query results example" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-            <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">The code is hosted on a real account token and scans a variety of guilds for user‑specified keywords that the user can predefine (e.g., "ollie") on detection the message is logged and relayed to a webhook. Roblox users (Next to the blue person) are scraped by confidence values utilising regex to identify strings that are deemed as valuable, users who send their user profile link in a specific channel will be identified as a confidence of 3 (highest possible, this will stack to ensure the program is entirely confident) </p>
-          </div>
-        </div>
-        <!-- 3. Enterprise Network Services with Active Directory (Independent) -->
-        <div class="project-item">
-          <div class="project-title">🏢 Enterprise Network Services with Active Directory</div>
-          <div class="tech-stack">Windows Server, VirtualBox, DNS, DHCP, Group Policy</div>
-          <div>Designed and deployed a complete corporate network on a virtual machine, transforming a standard Windows Server into a fully functional Domain Controller. Centralised user authentication and policy management for a simulated business, effectively integrating core network services (DNS, DHCP) with Active Directory.</div>
-          <div class="button-group">
-            <a href="assignments/SCDV44_CW2_JEF25003751_Jack_Jeffery_Networking 1.docx" class="btn-view" target="_blank">📄 View Assignment (PDF)</a>
-            <button class="btn-view toggle-screenshot-btn" data-target="screenshot-activedirectory">▶️ Show Video Demo</button>
-          </div>
-          <!-- Hidden video container -->
-          <div id="screenshot-activedirectory" class="screenshot-container" style="display: none; margin-top: 1rem;">
-            <div class="video-container">
-              <iframe 
-                class="responsive-iframe" 
-                src="https://www.youtube-nocookie.com/embed/aEGvHdF7f94" 
-                title="Active Directory Domain Controller Demo" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-              </iframe>
+          <!-- 2. Cloud MySQL Database (Independent) -->
+          <div class="project-item">
+            <div class="project-title">☁️ Cloud MySQL Database (Independent)</div>
+            <div class="tech-stack">MySQL, Railway (TCP proxy), Git, SQLTools</div>
+            <div>Deployed a relational database on Railway for Roblox profiles. Wrote optimised queries for duplicate detection and confidence scoring. systematically collected over 4,000 records of structured profile data.</div>
+            <div class="button-group">
+              <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank">🦑 Public Interface</a>
+              <a href="https://github.com/JackUCS/RBLXMonitoringSelf" class="btn-view" target="_blank">🦑 Bot using account tokens</a>
+              <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql">📸 Screenshots & Explanation</button>
             </div>
-            <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Active Directory Domain Controller / ADDS Demo.</p>
+            <div id="screenshot-cloudsql" class="screenshot-container" style="display: none; margin-top: 1rem;">
+              <img src="images/SQLScreenshot.png" alt="Database schema" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-bottom: 0.5rem;">Screenshot of database records</p>
+              <img src="images/Result.png" alt="Query results example" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">The code is hosted on a real account token and scans a variety of guilds for user‑specified keywords that the user can predefine (e.g., "ollie") on detection the message is logged and relayed to a webhook. Roblox users (Next to the blue person) are scraped by confidence values utilising regex to identify strings that are deemed as valuable, users who send their user profile link in a specific channel will be identified as a confidence of 3 (highest possible, this will stack to ensure the program is entirely confident)</p>
+            </div>
           </div>
-        </div>
+
+          <!-- 3. Enterprise Network Services with Active Directory (Independent) -->
+          <div class="project-item">
+            <div class="project-title">🏢 Enterprise Network Services with Active Directory</div>
+            <div class="tech-stack">Windows Server, VirtualBox, DNS, DHCP, Group Policy</div>
+            <div>Designed and deployed a complete corporate network on a virtual machine, transforming a standard Windows Server into a fully functional Domain Controller. Centralised user authentication and policy management for a simulated business, effectively integrating core network services (DNS, DHCP) with Active Directory.</div>
+            <div class="button-group">
+              <a href="assignments/SCDV44_CW2_JEF25003751_Jack_Jeffery_Networking 1.docx" class="btn-view" target="_blank">📄 View Assignment (PDF)</a>
+              <button class="btn-view toggle-screenshot-btn" data-target="screenshot-activedirectory">▶️ Show Video Demo</button>
+            </div>
+            <div id="screenshot-activedirectory" class="screenshot-container" style="display: none; margin-top: 1rem;">
+              <div class="video-container">
+                <iframe class="responsive-iframe" src="https://www.youtube-nocookie.com/embed/aEGvHdF7f94" title="Active Directory Domain Controller Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Active Directory Domain Controller / ADDS Demo.</p>
+            </div>
+          </div>
 
           <!-- 4. Unicorn Badminton Club Website Redesign (SCDV42) -->
           <div class="project-item">
@@ -149,7 +137,6 @@
               <a href="https://github.com/JackUCS/UBC-Assignment" class="btn-view" target="_blank">🦑 GitHub Repo</a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-ubc">📸 Show Screenshot</button>
             </div>
-            <!-- Hidden screenshot container -->
             <div id="screenshot-ubc" class="screenshot-container" style="display: none; margin-top: 1rem;">
               <img src="images/Desktop showcase.png" alt="UBC website desktop view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
               <img src="images/MOBILE SHOWCASE.png" alt="UBC website mobile view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
@@ -176,7 +163,6 @@
               <a href="assignments/SCDV44_CW2_JEF25003751_Jack_Jeffery_Networking 1.docx" class="btn-view" target="_blank">📄 View Assignment (PDF)</a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-dropship">📸 Show Network Diagram</button>
             </div>
-            <!-- Hidden screenshot container -->
             <div id="screenshot-dropship" class="screenshot-container" style="display: none; margin-top: 1rem;">
               <img src="images/network diagram.png" alt="Dropship network topology" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
               <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Packet Tracer network diagram showing VLAN segmentation and VPN tunnel.</p>

@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Dynamic copyright year
   const yearSpan = document.getElementById('current-year');
@@ -7,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 2. Console greeting for curious recruiters
+  // 2. Console greeting
   console.log(
     "%c👋 Thanks for viewing my CV!\n%cBuilt with HTML, CSS, and a little JavaScript – Jack Jeffery, Computing Student",
     "color: #3b82f6; font-size: 14px; font-weight: bold;",
     "color: #1e2a3e; font-size: 12px;"
   );
 
-  // 3. Smooth scroll for any internal anchor links (if added later)
+  // 3. Smooth scroll for anchor links (if any)
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -27,13 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Toggle screenshot/video visibility – preserving original button text
+  // 4. Toggle screenshot/video – preserve original button text
   const toggleButtons = document.querySelectorAll('.toggle-screenshot-btn');
   toggleButtons.forEach(btn => {
-    // Store the original button text (e.g., "▶️ Show video demo")
     const originalText = btn.textContent;
     btn.setAttribute('data-original-text', originalText);
-
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
       const targetDiv = document.getElementById(targetId);
@@ -43,13 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.textContent = '❌ Hide content';
         } else {
           targetDiv.style.display = 'none';
-          btn.textContent = originalText;  // Restore the exact original text
+          btn.textContent = originalText;
         }
       }
     });
   });
 
-  // 5. Lightbox / image expand on click (circular for headshot, rectangular for others)
+  // 5. Lightbox (expand images/videos on click)
   const modal = document.createElement('div');
   modal.id = 'lightbox-modal';
   modal.style.cssText = `
@@ -94,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImg.src = '';
   });
 
+  // Screenshot images (rectangular expansion)
   document.querySelectorAll('.screenshot-container img').forEach(img => {
     img.style.cursor = 'pointer';
     img.addEventListener('click', (e) => {
@@ -104,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Profile headshot (circular expansion)
   const headshot = document.querySelector('.headshot');
   if (headshot) {
-    headshot.style.cursor = 'pointer';
     headshot.addEventListener('click', (e) => {
       e.stopPropagation();
       modalImg.src = headshot.src;

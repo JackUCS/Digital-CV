@@ -63,6 +63,7 @@ body {
   border: 3px solid white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .headshot:hover {
@@ -233,6 +234,37 @@ ul li::before {
   font-size: 0.8rem;
 }
 
+/* video container (responsive iframe) */
+.video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 56.25%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* reduce gap between Education and first Key Project */
+.education-item {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+}
+.section:first-of-type .project-item:first-of-type {
+  margin-top: 0;
+}
+.right-col .section:first-child {
+  margin-bottom: 1rem;
+}
+
 /* mobile responsiveness */
 @media (max-width: 700px) {
   .header-text h1 {
@@ -257,34 +289,4 @@ ul li::before {
   .headshot {
     margin-top: 0.5rem;
   }
-}
-    /* Reduce gap between Education section and first Key Project */
-    .education-item {
-      margin-bottom: 0.75rem;  /* was 1.5rem */
-      padding-bottom: 0.4rem;
-    }
-    .section:first-of-type .project-item:first-of-type {
-      margin-top: 0;
-    }
-    /* Tighter spacing for right column sections */
-    .right-col .section:first-child {
-      margin-bottom: 1rem;
-    }
-
-    .video-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-bottom: 56.25%;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.responsive-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
 }
