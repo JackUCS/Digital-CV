@@ -21,7 +21,7 @@
       <ul class="nav-menu">
         <li><a href="/" class="nav-link active"><i class="fas fa-user"></i> CV</a></li>
         <li><a href="/journal" class="nav-link"><i class="fas fa-book-open"></i> Journal</a></li>
-        <li><a href="https://github.com/JackUCS" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
+        <li><a href="#" id="github-choice-trigger" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
       </ul>
       <div class="nav-toggle">
         <i class="fas fa-bars"></i>
@@ -78,7 +78,7 @@
         </div>
         <div class="section">
           <div class="section-title">Links</div>
-          <p><i class="fab fa-github"></i> <a href="https://github.com/JackUCS" target="_blank" class="custom-link">Github.com/JackUCS</a></p>
+          <p><i class="fab fa-github"></i> <a href="#" id="github-choice-trigger" class="custom-link">Github.com/JackUCS</a></p>
           <div class="pdf-button-wrapper">
             <a href="Digital CV/JackJefferyCV.pdf" class="btn-download" download><i class="fas fa-file-pdf"></i> Download PDF version</a>
           </div>
@@ -201,6 +201,30 @@
 <div id="project-modal" class="modal-overlay">
   <div class="modal-container">
     <div class="modal-content"></div>
+  </div>
+</div>
+
+<!-- GitHub choice modal -->
+<!-- GitHub choice modal -->
+<div id="github-choice-modal" class="modal-overlay">
+  <div class="modal-container github-choice-container">
+    <div class="modal-content github-choice-content">
+      <h3><i class="fab fa-github"></i> GitHub</h3>
+      <p>How would you like to view my GitHub profile?</p>
+      <div class="github-buttons">
+        <button id="github-view-external" class="btn-view"><i class="fas fa-external-link-alt"></i> View on GitHub</button>
+        <button id="github-view-image" class="btn-view"><i class="fas fa-image"></i> View interactive image</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for the interactive GitHub screenshot -->
+<div id="github-image-modal" class="modal-overlay">
+  <div class="modal-container github-interactive-container">
+    <div class="github-image-wrapper">
+      <img src="images/gitscreenshot.png" alt="GitHub Profile Screenshot" class="github-interactive-img">
+    </div>
   </div>
 </div>
 

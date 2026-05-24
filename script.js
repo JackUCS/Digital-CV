@@ -171,5 +171,103 @@ document.addEventListener('DOMContentLoaded', () => {
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
+  // --- 8. GitHub choice modal and interactive image modal ---
+  const githubTriggers = document.querySelectorAll('#github-choice-trigger');
+  const choiceModal = document.getElementById('github-choice-modal');
+  const imageModal = document.getElementById('github-image-modal');
+
+  if (githubTriggers.length && choiceModal && imageModal) {
+    // Open choice modal when any GitHub trigger is clicked
+    githubTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        choiceModal.classList.add('active');
+      });
+    });
+
+    // Close choice modal when clicking overlay
+    choiceModal.addEventListener('click', (e) => {
+      if (e.target === choiceModal) {
+        choiceModal.classList.remove('active');
+      }
+    });
+
+    // Close image modal when clicking overlay
+    imageModal.addEventListener('click', (e) => {
+      if (e.target === imageModal) {
+        imageModal.classList.remove('active');
+        const wrapper = imageModal.querySelector('.github-image-wrapper');
+        if (wrapper && imageModal.parallaxEffect) {
+          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
+          delete imageModal.parallaxEffect;
+          wrapper.style.transform = '';
+        }
+      }
+    });
+
+    // Escape key closes both modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (choiceModal.classList.contains('active')) choiceModal.classList.remove('active');
+        if (imageModal.classList.contains('active')) {
+          imageModal.classList.remove('active');
+          const wrapper = imageModal.querySelector('.github-image-wrapper');
+          if (wrapper && imageModal.parallaxEffect) {
+            imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
+            delete imageModal.parallaxEffect;
+            wrapper.style.transform = '';
+          }
+        }
+      }
+    });
+
+    // "View on GitHub" button
+    const externalBtn = document.getElementById('github-view-external');
+    if (externalBtn) {
+      externalBtn.addEventListener('click', () => {
+        window.open('https://github.com/JackUCS', '_blank');
+        choiceModal.classList.remove('active');
+      });
+    }
+
+    // "View interactive image" button
+    const imageBtn = document.getElementById('github-view-image');
+    if (imageBtn) {
+      imageBtn.addEventListener('click', () => {
+        choiceModal.classList.remove('active');
+        imageModal.classList.add('active');
+        const wrapper = imageModal.querySelector('.github-image-wrapper');
+        if (wrapper) {
+          const parallaxEffect = (e) => {
+            const rect = imageModal.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) / rect.width;
+            const mouseY = (e.clientY - rect.top) / rect.height;
+            const tiltX = (mouseY - 0.5) * 30;
+            const tiltY = (mouseX - 0.5) * -30;
+            wrapper.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+          };
+          imageModal.addEventListener('mousemove', parallaxEffect);
+          imageModal.parallaxEffect = parallaxEffect;
+        }
+      });
+    }
+
+    // --- NEW: Make the interactive image itself clickable to open GitHub ---
+    const interactiveImg = document.querySelector('.github-interactive-img');
+    if (interactiveImg) {
+      interactiveImg.addEventListener('click', () => {
+        window.open('https://github.com/JackUCS', '_blank');
+        // Optionally close the modal after click
+        imageModal.classList.remove('active');
+        const wrapper = imageModal.querySelector('.github-image-wrapper');
+        if (wrapper && imageModal.parallaxEffect) {
+          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
+          delete imageModal.parallaxEffect;
+          wrapper.style.transform = '';
+        }
+      });
+    }
+  }
+
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
