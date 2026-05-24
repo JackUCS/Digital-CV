@@ -255,20 +255,27 @@ body {
 }
 
 /* headshot styling */
+/* headshot styling with depth effect */
 .headshot {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.3),
+              0 4px 8px -4px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(79, 158, 255, 0.15) inset;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), 
+              box-shadow 0.3s ease,
+              border-color 0.2s ease;
   cursor: pointer;
 }
 
 .headshot:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transform: scale(1.03);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4),
+              0 0 0 2px rgba(79, 158, 255, 0.3) inset;
+  border-color: rgba(79, 158, 255, 0.5);
 }
 
 .cv-main {
@@ -325,6 +332,7 @@ body {
   margin-bottom: 0.4rem;
   letter-spacing: -0.2px;
 }
+
 
 .skill-tag, .skill-link {
   display: inline-block;
@@ -793,4 +801,358 @@ ul li::before {
 /* Ensure hover always wins */
 .project-item:hover {
   transform: scale(1.02) !important;  /* temporary test – remove if works */
+}
+/* ============================================
+   SCRATCH CARD (GitHub interactive card)
+   ============================================ */
+.scratch-card-wrapper {
+  perspective: 1200px;
+  margin: 1rem 0 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.premium-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  min-height: 290px;
+  background-color: #0b0f12;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: crosshair;
+}
+
+/* Background Image */
+.card-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mouse Tracking Spotlight Layer */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    450px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(79, 158, 255, 0.28) 0%,
+    rgba(37, 99, 235, 0.14) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.card-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Text Hierarchies */
+.card-header,
+.card-footer {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.card-header {
+  margin-bottom: auto;
+}
+
+.card-footer {
+  margin-top: auto;
+  font-size: 0.7rem;
+  color: #cbd5e1;
+}
+
+.meta-label {
+  color: #94a3b8;
+  margin-bottom: 2px;
+  font-size: 0.65rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Center Text Overlay */
+.value-display {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.price-reveal {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  font-family: inherit;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.4);
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+}
+
+/* Scratch Canvas */
+.scratch-surface {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  cursor: crosshair;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scratch-surface.is-completed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .scratch-card-wrapper {
+    margin: 1rem 0;
+  }
+  .premium-card {
+    padding: 1rem;
+    min-height: 240px;
+  }
+  .price-reveal {
+    font-size: 1.1rem;
+  }
+  .card-header, .card-footer {
+    font-size: 0.7rem;
+  }
+}
+/* ============================================
+   SCRATCH CARD MODAL (GitHub interactive card)
+   ============================================ */
+
+/* Modal Overlay - glass background */
+#scratch-card-wrapper.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px) brightness(0.9);
+  -webkit-backdrop-filter: blur(12px) brightness(0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+#scratch-card-wrapper.modal-overlay.active {
+  display: flex !important;
+}
+
+/* Container - centered content */
+.scratch-modal-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Instruction text - glass pill, centered */
+.scratch-instruction {
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+  padding: 0.6rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.scratch-instruction i {
+  font-size: 1rem;
+  color: #4f9eff;
+}
+
+/* Card Wrapper - 3D perspective */
+.scratch-card-container {
+  perspective: 1200px;
+  display: inline-block;
+}
+
+/* The actual scratch card - credit card proportions */
+.premium-card {
+  position: relative;
+  width: 480px;
+  height: 290px;
+  background: linear-gradient(135deg, #0f1820 0%, #0a0f14 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4),
+              0 5px 12px -5px rgba(0, 0, 0, 0.2),
+              0 0 0 1px rgba(79, 158, 255, 0.1) inset;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease;
+  cursor: crosshair;
+}
+.premium-card:hover {
+  box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(79, 158, 255, 0.2) inset;
+}
+
+/* Background Image */
+.card-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #0a0f14;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mouse Tracking Spotlight - glassy highlight */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(79, 158, 255, 0.2) 0%,
+    rgba(79, 158, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0) 80%
+  );
+}
+
+/* Subtle noise pattern */
+.card-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Header */
+.card-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Footer */
+.card-footer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.meta-label {
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 2px;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Scratch Canvas */
+.scratch-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: crosshair;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 24px;
+}
+
+.scratch-surface.is-completed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+  .premium-card {
+    width: 92vw;
+    height: calc(92vw * 290 / 480);
+    padding: 1rem;
+  }
+  .scratch-instruction {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .card-header, .card-footer {
+    font-size: 0.65rem;
+  }
 }

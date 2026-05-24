@@ -85,15 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
         height: min(80vh, 80vw);
         object-fit: cover;
         border-radius: 50%;
-        border: 4px solid white;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        border: 3px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5),
+                    0 5px 15px -5px rgba(0, 0, 0, 0.3),
+                    0 0 0 2px rgba(79, 158, 255, 0.2) inset;
+        transition: all 0.3s ease;
       `;
     } else {
       lightboxImg.style.cssText = `
         max-width: 90%;
         max-height: 90%;
         border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(79, 158, 255, 0.15) inset;
       `;
     }
   };
@@ -171,78 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
-  // --- 8. GitHub interactive image modal (direct, no choice) ---
-  const githubTriggers = document.querySelectorAll('#github-choice-trigger');
-  const imageModal = document.getElementById('github-image-modal');
-
-  if (githubTriggers.length && imageModal) {
-    // Open image modal directly when any GitHub trigger is clicked
-    githubTriggers.forEach(trigger => {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        imageModal.classList.add('active');
-        
-        // Attach parallax effect to the wrapper
-        const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper && !imageModal.parallaxEffect) {
-          const parallaxEffect = (e) => {
-            const rect = imageModal.getBoundingClientRect();
-            const mouseX = (e.clientX - rect.left) / rect.width;
-            const mouseY = (e.clientY - rect.top) / rect.height;
-            const tiltX = (mouseY - 0.5) * 30;
-            const tiltY = (mouseX - 0.5) * -30;
-            wrapper.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-          };
-          imageModal.addEventListener('mousemove', parallaxEffect);
-          imageModal.parallaxEffect = parallaxEffect;
-        }
-      });
-    });
-
-    // Close modal when clicking overlay
-    imageModal.addEventListener('click', (e) => {
-      if (e.target === imageModal) {
-        imageModal.classList.remove('active');
-        const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper && imageModal.parallaxEffect) {
-          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
-          delete imageModal.parallaxEffect;
-          wrapper.style.transform = '';
-        }
-      }
-    });
-
-    // Close with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && imageModal.classList.contains('active')) {
-        imageModal.classList.remove('active');
-        const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper && imageModal.parallaxEffect) {
-          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
-          delete imageModal.parallaxEffect;
-          wrapper.style.transform = '';
-        }
-      }
-    });
-
-    // Make the interactive image wrapper clickable to open GitHub
-    const interactiveWrapper = document.querySelector('.github-image-wrapper');
-    if (interactiveWrapper) {
-      interactiveWrapper.addEventListener('click', (e) => {
-        e.stopPropagation();
-        window.open('https://github.com/JackUCS', '_blank');
-        imageModal.classList.remove('active');
-        const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper && imageModal.parallaxEffect) {
-          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
-          delete imageModal.parallaxEffect;
-          wrapper.style.transform = '';
-        }
-      });
-    }
-  }
-
-  // --- 9. Theme Toggle (Dark/Light Mode) ---
+  // --- 8. Theme Toggle (Dark/Light Mode) ---
   const themeToggle = document.getElementById('theme-btn');
   const htmlElement = document.documentElement;
 
@@ -257,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 10. Fade-in on scroll using Intersection Observer ---
+  // --- 9. Fade-in on scroll using Intersection Observer ---
   const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
   
   const observer = new IntersectionObserver((entries) => {
@@ -267,14 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.15 });
   
   fadeElements.forEach(el => observer.observe(el));
 
-  console.log("Pro tip: You can reach me via GitHub – links are above.");
-});
-
-  // --- 11. Interactive Grid Background ---
+  // --- 10. Interactive Grid Background ---
   const gridContainer = document.getElementById("grid-bg");
   const blockSize = 60;
 
@@ -305,19 +235,199 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 150);
   });
 
-// Journal teaser modal (optional)
-const journalTeaser = document.querySelector('.journal-teaser');
-const journalModal = document.getElementById('journal-preview-modal');
-if (journalTeaser && journalModal) {
-  journalTeaser.style.cursor = 'pointer';
-  journalTeaser.addEventListener('click', (e) => {
-    if (e.target.closest('.btn-view')) return; // don't open modal if clicking the button
-    journalModal.classList.add('active');
-  });
-  // Close modal on overlay click
-  journalModal.addEventListener('click', (e) => {
-    if (e.target === journalModal) {
-      journalModal.classList.remove('active');
+  // --- 11. Journal teaser modal ---
+  const journalTeaser = document.querySelector('.journal-teaser');
+  const journalModal = document.getElementById('journal-preview-modal');
+  if (journalTeaser && journalModal) {
+    journalTeaser.style.cursor = 'pointer';
+    journalTeaser.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-view')) return;
+      journalModal.classList.add('active');
+    });
+    journalModal.addEventListener('click', (e) => {
+      if (e.target === journalModal) {
+        journalModal.classList.remove('active');
+      }
+    });
+  }
+
+  // --- 12. Show Scratch Card when GitHub link is clicked ---
+  const githubTriggers = document.querySelectorAll('#github-choice-trigger');
+  const scratchCardOverlay = document.getElementById('scratch-card-wrapper');
+
+  if (githubTriggers.length && scratchCardOverlay) {
+    githubTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        scratchCardOverlay.classList.add('active');
+        // Delay canvas initialization until modal is fully visible
+        setTimeout(() => {
+          initScratchCard();
+        }, 100);
+      });
+    });
+
+    // Close scratch card when clicking outside the card
+    scratchCardOverlay.addEventListener('click', (e) => {
+      if (e.target === scratchCardOverlay) {
+        scratchCardOverlay.classList.remove('active');
+      }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && scratchCardOverlay.classList.contains('active')) {
+        scratchCardOverlay.classList.remove('active');
+      }
+    });
+  }
+
+  // --- 13. Scratch Card Canvas Initialization ---
+  let scratchCtx = null;
+  let scratchCardElement = null;
+  let scratchCanvasElement = null;
+  let isScratchCompleted = false;
+  let lastX = 0, lastY = 0;
+  let isFirstMove = true;
+  const SCRATCH_THRESHOLD = 0.45;
+  const BRUSH_SIZE = 32;
+
+  function initScratchCard() {
+    scratchCardElement = document.getElementById("interactive-card");
+    scratchCanvasElement = document.getElementById("scratch-canvas");
+    
+    if (!scratchCardElement || !scratchCanvasElement) return;
+    
+    // Reset state
+    isScratchCompleted = false;
+    isFirstMove = true;
+    
+    // Set canvas size to match card
+    scratchCanvasElement.width = scratchCardElement.offsetWidth;
+    scratchCanvasElement.height = scratchCardElement.offsetHeight;
+    
+    // Get context and draw scratch coating
+    scratchCtx = scratchCanvasElement.getContext("2d");
+    scratchCtx.fillStyle = "#16191b";
+    scratchCtx.fillRect(0, 0, scratchCanvasElement.width, scratchCanvasElement.height);
+    
+    // Add noise texture
+    for (let i = 0; i < scratchCanvasElement.width; i += 2) {
+      let n = Math.floor(Math.random() * 12);
+      scratchCtx.fillStyle = `rgba(255, 255, 255, ${0.01 + n / 1000})`;
+      scratchCtx.fillRect(i, 0, 1, scratchCanvasElement.height);
     }
+    
+    // Remove completed class if present
+    scratchCanvasElement.classList.remove("is-completed");
+    scratchCardElement.style.cursor = "crosshair";
+    
+    // Remove old click listener
+    const oldClick = scratchCardElement._scratchClick;
+    if (oldClick) scratchCardElement.removeEventListener("click", oldClick);
+  }
+
+  function scratch(x, y) {
+    if (isScratchCompleted || !scratchCtx) return;
+    scratchCtx.globalCompositeOperation = "destination-out";
+    scratchCtx.lineJoin = "round";
+    scratchCtx.lineCap = "round";
+    scratchCtx.lineWidth = BRUSH_SIZE * 2;
+    scratchCtx.beginPath();
+    if (isFirstMove) {
+      scratchCtx.moveTo(x, y);
+      isFirstMove = false;
+    } else {
+      scratchCtx.moveTo(lastX, lastY);
+    }
+    scratchCtx.lineTo(x, y);
+    scratchCtx.stroke();
+    lastX = x;
+    lastY = y;
+    queuePercentageCheck();
+  }
+
+  let checkTimeout;
+  function queuePercentageCheck() {
+    clearTimeout(checkTimeout);
+    checkTimeout = setTimeout(() => {
+      if (isScratchCompleted || !scratchCtx) return;
+      const imageData = scratchCtx.getImageData(0, 0, scratchCanvasElement.width, scratchCanvasElement.height);
+      const pixels = imageData.data;
+      let cleared = 0;
+      for (let i = 3; i < pixels.length; i += 32) {
+        if (pixels[i] === 0) cleared++;
+      }
+      const currentProgress = cleared / (pixels.length / 32);
+      if (currentProgress >= SCRATCH_THRESHOLD) {
+        isScratchCompleted = true;
+        scratchCanvasElement.classList.add("is-completed");
+        scratchCardElement.style.cursor = "pointer";
+        const clickHandler = () => {
+          window.open("https://github.com/JackUCS", "_blank");
+        };
+        scratchCardElement.addEventListener("click", clickHandler);
+        scratchCardElement._scratchClick = clickHandler;
+      }
+    }, 40);
+  }
+
+  // Attach mouse/touch handlers to the scratch card (delegated, will work after init)
+  document.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('#interactive-card');
+    if (!card) return;
+    
+    // Only attach handlers if not already attached
+    if (card.hasScratchHandlers) return;
+    card.hasScratchHandlers = true;
+    
+    card.addEventListener("mousemove", (e) => {
+      if (!scratchCardElement || !scratchCanvasElement) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mx", `${x}px`);
+      card.style.setProperty("--my", `${y}px`);
+      const cardWidth = rect.width, cardHeight = rect.height;
+      const centerX = cardWidth / 2, centerY = cardHeight / 2;
+      const maxTilt = 10;
+      const tiltX = ((centerY - y) / centerY) * maxTilt;
+      const tiltY = ((x - centerX) / centerX) * maxTilt;
+      card.style.transition = "none";
+      card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      scratch(x, y);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      isFirstMove = true;
+      card.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+      card.style.transform = "rotateX(0deg) rotateY(0deg)";
+      card.style.setProperty("--mx", "50%");
+      card.style.setProperty("--my", "50%");
+    });
+
+    card.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      const rect = card.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      const y = e.touches[0].clientY - rect.top;
+      scratch(x, y);
+    }, { passive: false });
+
+    card.addEventListener("touchstart", (e) => {
+      const rect = card.getBoundingClientRect();
+      lastX = e.touches[0].clientX - rect.left;
+      lastY = e.touches[0].clientY - rect.top;
+      isFirstMove = false;
+    });
   });
-}
+  
+  // Initial call to set up the card if it's visible (won't work if hidden, but that's fine)
+  setTimeout(() => {
+    if (scratchCardOverlay && scratchCardOverlay.classList.contains('active')) {
+      initScratchCard();
+    }
+  }, 500);
+
+  console.log("Pro tip: You can reach me via GitHub – links are above.");
+});
