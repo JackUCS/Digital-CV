@@ -14,7 +14,7 @@
 <body>
 <div class="container">
 
-  <!-- Navigation Bar – journal style with JJ logo and burger toggle -->
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">JJ</a>
@@ -38,6 +38,7 @@
       <img src="images/head.jpg" alt="Jack Jeffery" class="headshot">
     </div>
   </div>
+
   <div class="cv-main">
     <div class="two-col">
       <!-- LEFT COLUMN -->
@@ -77,12 +78,12 @@
         </div>
         <div class="section">
           <div class="section-title">Links</div>
-          <p><i class="fab fa-github"></i> <a href="https://Github.com/JackUCS" target="_blank" class="custom-link">Github.com/JackUCS</a></p>
+          <p><i class="fab fa-github"></i> <a href="https://github.com/JackUCS" target="_blank" class="custom-link">Github.com/JackUCS</a></p>
           <div class="pdf-button-wrapper">
             <a href="Digital CV/JackJefferyCV.pdf" class="btn-download" download><i class="fas fa-file-pdf"></i> Download PDF version</a>
           </div>
         </div>
-      </div>
+      </div> <!-- end left-col -->
 
       <!-- RIGHT COLUMN -->
       <div class="right-col">
@@ -105,9 +106,7 @@
             <div>Designed and developed a responsive, mobile‑first CV website from scratch. Implemented a modern UI with flexbox layouts, skill tags, dynamic copyright year via JavaScript, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) using CNAME and TXT verification records, and resolved DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
             <div class="button-group">
               <a href="https://jackcv.xyz" class="btn-view" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Live Site (You are here)</a>
-              <a href="https://github.com/JackUCS/Digital-CV" class="btn-view" target="_blank">
-                <i class="fab fa-github"></i> GitHub Repo
-              </a>
+              <a href="https://github.com/JackUCS/Digital-CV" class="btn-view" target="_blank"><i class="fab fa-github"></i> GitHub Repo</a>
             </div>
           </div>
 
@@ -117,12 +116,8 @@
             <div class="tech-stack"><i class="fas fa-database"></i> MySQL, Railway (TCP proxy), Git, SQLTools</div>
             <div>Deployed a relational database on Railway for Roblox profiles. Wrote optimised queries for duplicate detection and confidence scoring. systematically collected over 4,000 records of structured profile data.</div>
             <div class="button-group">
-              <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank">
-                <i class="fab fa-github"></i> Public Interface
-              </a>
-              <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" class="btn-view" target="_blank">
-                <i class="fab fa-github"></i> Bot using account tokens
-              </a>
+              <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank"><i class="fab fa-github"></i> Public Interface</a>
+              <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" class="btn-view" target="_blank"><i class="fab fa-github"></i> Bot using account tokens</a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql"><i class="fas fa-camera"></i> Screenshots & Explanation</button>
             </div>
             <div id="screenshot-cloudsql" class="screenshot-container" style="display: none; margin-top: 1rem;">
@@ -157,9 +152,7 @@
             <div>Mobile‑first responsive redesign, dark mode toggle, Successful deployment of a website, Lighthouse performance score 94. Fixed accessibility issues and replaced unlicensed images.</div>
             <div class="button-group">
               <a href="assignments/SCDV42_CW2_JEF25003751_Jack_Jeffery_Web 1.docx" class="btn-view" target="_blank"><i class="fas fa-file-alt"></i> View Assignment (DOCX)</a>
-              <a href="https://github.com/JackUCS/UBC-Assignment" class="btn-view" target="_blank">
-                <i class="fab fa-github"></i> GitHub Repo
-              </a>
+              <a href="https://github.com/JackUCS/UBC-Assignment" class="btn-view" target="_blank"><i class="fab fa-github"></i> GitHub Repo</a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-ubc"><i class="fas fa-camera"></i> Show Screenshot</button>
             </div>
             <div id="screenshot-ubc" class="screenshot-container" style="display: none; margin-top: 1rem;">
@@ -191,26 +184,23 @@
             <div>Designed a relational database (Customers, Products, Orders – 50+ rows). Wrote advanced SQL queries (window functions, subqueries). Built a linear regression model (R²=0.997) to predict order value.</div>
             <div class="button-group">
               <a href="assignments/SCDV45_CW2_JEF25003751_DataScience.docx" class="btn-view" target="_blank"><i class="fas fa-file-alt"></i> View Assignment (DOCX)</a>
-              <a href="https://github.com/JackUCS/SCDV45_CW2" class="btn-view" target="_blank">
-                <i class="fab fa-github"></i> GitHub Repo
-              </a>
+              <a href="https://github.com/JackUCS/SCDV45_CW2" class="btn-view" target="_blank"><i class="fab fa-github"></i> GitHub Repo</a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+        </div> <!-- end key projects section -->
+      </div> <!-- end right-col -->
+    </div> <!-- end two-col -->
 
     <hr>
     <p class="copyright">© <span id="current-year"></span> Jack Jeffery – Last updated May 2026</p>
-  </div>
-</div>
+  </div> <!-- end cv-main -->
+</div> <!-- end container -->
 
 <!-- Modal for project detail popup -->
 <div id="project-modal" class="modal-overlay">
   <div class="modal-container">
-    <div class="modal-content">
-      <!-- Content will be cloned from the clicked project -->
-    </div>
+    <div class="modal-content"></div>
   </div>
 </div>
 

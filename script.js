@@ -1,7 +1,6 @@
-// Consolidated script – runs once after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. Mobile nav toggle (simple) ---
+  // --- 1. Mobile nav toggle ---
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
   if (navToggle && navMenu) {
@@ -17,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 3. Console greeting ---
-  console.log(
-    "%c👋 Thanks for viewing my CV!\n%cBuilt with HTML, CSS, and a little JavaScript – Jack Jeffery, Computing Student",
+  console.log("%c👋 Thanks for viewing my CV!\n%cBuilt with HTML, CSS, and a little JavaScript – Jack Jeffery, Computing Student",
     "color: #3b82f6; font-size: 14px; font-weight: bold;",
     "color: #1e2a3e; font-size: 12px;"
   );
@@ -36,12 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 5. Screenshot/video toggles (preserve original button text) ---
+  // --- 5. Screenshot/video toggles with debounce ---
   const toggleButtons = document.querySelectorAll('.toggle-screenshot-btn');
   toggleButtons.forEach(btn => {
     const originalText = btn.textContent;
     btn.setAttribute('data-original-text', originalText);
+    let isToggling = false;
     btn.addEventListener('click', () => {
+      if (isToggling) return;
+      isToggling = true;
       const targetId = btn.getAttribute('data-target');
       const targetDiv = document.getElementById(targetId);
       if (targetDiv) {
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.textContent = originalText;
         }
       }
+      setTimeout(() => { isToggling = false; }, 300);
     });
   });
 
@@ -101,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImg.src = '';
   });
 
-  // Screenshot images (rectangular)
   document.querySelectorAll('.screenshot-container img').forEach(img => {
     img.style.cursor = 'pointer';
     img.addEventListener('click', (e) => {
@@ -112,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Profile headshot (circular)
   const headshot = document.querySelector('.headshot');
   if (headshot) {
     headshot.style.cursor = 'pointer';
@@ -124,15 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 7. Modal for project items (CV page) and journal entries (journal page) ---
-  // Helper to set up modal for a given selector and modal ID
+  // --- 7. Expandable modal for project items and journal entries (with debounce) ---
   function setupExpandableModal(selector, modalId) {
     const modalOverlay = document.getElementById(modalId);
-    if (!modalOverlay) return;   // modal not present on this page
+    if (!modalOverlay) return;
     const modalContent = modalOverlay.querySelector('.modal-content');
     if (!modalContent) return;
 
-    // Close modal when clicking overlay background
+    let isOpening = false;
+
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
         modalOverlay.classList.remove('active');
@@ -140,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close with Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
         modalOverlay.classList.remove('active');
@@ -148,33 +147,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Attach click to each target element
     const elements = document.querySelectorAll(selector);
     elements.forEach(el => {
       el.style.cursor = 'pointer';
       el.addEventListener('click', (e) => {
-        // Don't trigger if clicking inside a button or link
+        if (isOpening) return;
         if (e.target.closest('.btn-view, .btn-download, a, button')) return;
-
+        isOpening = true;
         const clone = el.cloneNode(true);
         clone.removeAttribute('id');
         clone.style.cursor = 'default';
         clone.style.margin = '0';
         clone.style.padding = '0';
         clone.classList.add('modal-clone');
-
         modalContent.innerHTML = '';
         modalContent.appendChild(clone);
         modalOverlay.classList.add('active');
+        setTimeout(() => { isOpening = false; }, 500);
       });
     });
   }
 
-  // Apply to project items (CV page) and journal entries (journal page)
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
-  // --- Final console hint ---
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
-

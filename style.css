@@ -134,7 +134,7 @@ body {
   }
 }
 
-/* header with lighter gradient + flex for photo (unchanged – kept as is) */
+/* header gradient */
 .cv-header {
   background: linear-gradient(135deg, #1a4a6e 0%, #2a6a8e 100%);
   color: white;
@@ -164,12 +164,8 @@ body {
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .header-text p {
@@ -362,6 +358,7 @@ ul li::before {
 .nav-menu li::before {
   content: none;
 }
+
 /* video container (responsive iframe) */
 .video-container {
   position: relative;
@@ -452,9 +449,9 @@ ul li::before {
 /* Hover effect for project items – smooth pop-out */
 .project-item {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
-  border-radius: 16px;          /* softens the corners on hover */
-  padding: 1rem 1rem 0.75rem 1rem;  /* optional: adds inner spacing */
-  margin-left: -1rem;           /* offset the padding to keep alignment */
+  border-radius: 16px;
+  padding: 1rem 1rem 0.75rem 1rem;
+  margin-left: -1rem;
   margin-right: -1rem;
   background-color: transparent;
 }
@@ -462,10 +459,11 @@ ul li::before {
 .project-item:hover {
   transform: scale(1.02);
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
-  background-color: #ffffff;    /* matches your card background */
-  z-index: 1;                   /* lifts above adjacent items */
-  position: relative;           /* needed for z-index */
+  background-color: #ffffff;
+  z-index: 1;
+  position: relative;
 }
+
 /* Modal overlay – liquid glass background */
 .modal-overlay {
   display: none;
