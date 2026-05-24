@@ -23,7 +23,7 @@ body {
 
 /* Navbar styles – drop down menu */
 .navbar {
-  background: #1a3f55;
+  background: #0d2f48;
   padding: 0.5rem 2rem;
   position: sticky;
   top: 0;
@@ -66,7 +66,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .nav-link:hover {
@@ -100,7 +100,7 @@ body {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: #1a3f55;
+    background: #235877;
     width: 100%;
     max-height: 0;
     overflow: hidden;
@@ -136,7 +136,7 @@ body {
 
 /* header with lighter gradient + flex for photo (unchanged – kept as is) */
 .cv-header {
-  background: linear-gradient(135deg, #1a3f55 0%, #2c5f8a 100%);
+  background: linear-gradient(135deg, #1a4a6e 0%, #2a6a8e 100%);
   color: white;
   padding: 2rem 2rem;
 }
@@ -154,11 +154,22 @@ body {
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
-  background: linear-gradient(to right, #ffffff, #c0e0ff);
+  background: linear-gradient(90deg, #ffffff, #c0e0ff, #7bb3e0, #c0e0ff, #ffffff);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   display: inline-block;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .header-text p {
@@ -436,4 +447,96 @@ ul li::before {
   background: #d4e6ff;
   transform: translateY(-1px);
   color: #1a4a6e;
+}
+
+/* Hover effect for project items – smooth pop-out */
+.project-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+  border-radius: 16px;          /* softens the corners on hover */
+  padding: 1rem 1rem 0.75rem 1rem;  /* optional: adds inner spacing */
+  margin-left: -1rem;           /* offset the padding to keep alignment */
+  margin-right: -1rem;
+  background-color: transparent;
+}
+
+.project-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;    /* matches your card background */
+  z-index: 1;                   /* lifts above adjacent items */
+  position: relative;           /* needed for z-index */
+}
+/* Modal overlay – liquid glass background */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px) brightness(0.9);
+  -webkit-backdrop-filter: blur(8px) brightness(0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-container {
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 32px;
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+/* Close button (optional) */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #4f9eff;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #1a4a6e;
+}
+
+/* Ensure cloned content inside modal uses same styles as original */
+.modal-content .project-title,
+.modal-content .tech-stack,
+.modal-content .button-group {
+  margin-bottom: 1rem;
+}
+
+.modal-content .project-item {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.modal-content .button-group {
+  margin-top: 1.5rem;
 }

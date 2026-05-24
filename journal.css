@@ -227,3 +227,20 @@ html {
     font-size: 0.8rem;
   }
 }
+/* Pop-out hover effect for journal entries */
+.journal-entry {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+  border-radius: 16px;
+  padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  background-color: transparent;
+}
+
+.journal-entry:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  z-index: 1;
+  position: relative;
+}

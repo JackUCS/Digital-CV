@@ -1,30 +1,29 @@
-// Simple mobile toggle (no icon swap)
-document.addEventListener('DOMContentLoaded', function() {
+// Consolidated script – runs once after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+
+  // --- 1. Mobile nav toggle (simple) ---
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
-
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function() {
+    navToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 1. Dynamic copyright year
+  // --- 2. Dynamic copyright year ---
   const yearSpan = document.getElementById('current-year');
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 2. Console greeting
+  // --- 3. Console greeting ---
   console.log(
     "%c👋 Thanks for viewing my CV!\n%cBuilt with HTML, CSS, and a little JavaScript – Jack Jeffery, Computing Student",
     "color: #3b82f6; font-size: 14px; font-weight: bold;",
     "color: #1e2a3e; font-size: 12px;"
   );
 
-  // 3. Smooth scroll for anchor links (if any)
+  // --- 4. Smooth scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Toggle screenshot/video – preserve original button text
+  // --- 5. Screenshot/video toggles (preserve original button text) ---
   const toggleButtons = document.querySelectorAll('.toggle-screenshot-btn');
   toggleButtons.forEach(btn => {
     const originalText = btn.textContent;
@@ -57,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. Lightbox (expand images/videos on click)
-  const modal = document.createElement('div');
-  modal.id = 'lightbox-modal';
-  modal.style.cssText = `
+  // --- 6. Lightbox for images (headshot + screenshots) ---
+  const lightboxModal = document.createElement('div');
+  lightboxModal.id = 'lightbox-modal';
+  lightboxModal.style.cssText = `
     display: none;
     position: fixed;
     top: 0;
@@ -73,13 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     z-index: 9999;
     cursor: pointer;
   `;
-  const modalImg = document.createElement('img');
-  modal.appendChild(modalImg);
-  document.body.appendChild(modal);
+  const lightboxImg = document.createElement('img');
+  lightboxModal.appendChild(lightboxImg);
+  document.body.appendChild(lightboxModal);
 
-  const setModalStyle = (isHeadshot) => {
+  const setLightboxStyle = (isHeadshot) => {
     if (isHeadshot) {
-      modalImg.style.cssText = `
+      lightboxImg.style.cssText = `
         width: min(80vh, 80vw);
         height: min(80vh, 80vw);
         object-fit: cover;
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       `;
     } else {
-      modalImg.style.cssText = `
+      lightboxImg.style.cssText = `
         max-width: 90%;
         max-height: 90%;
         border-radius: 12px;
@@ -97,33 +96,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  modal.addEventListener('click', () => {
-    modal.style.display = 'none';
-    modalImg.src = '';
+  lightboxModal.addEventListener('click', () => {
+    lightboxModal.style.display = 'none';
+    lightboxImg.src = '';
   });
 
-  // Screenshot images (rectangular expansion)
+  // Screenshot images (rectangular)
   document.querySelectorAll('.screenshot-container img').forEach(img => {
     img.style.cursor = 'pointer';
     img.addEventListener('click', (e) => {
       e.stopPropagation();
-      modalImg.src = img.src;
-      setModalStyle(false);
-      modal.style.display = 'flex';
+      lightboxImg.src = img.src;
+      setLightboxStyle(false);
+      lightboxModal.style.display = 'flex';
     });
   });
 
-  // Profile headshot (circular expansion)
+  // Profile headshot (circular)
   const headshot = document.querySelector('.headshot');
   if (headshot) {
+    headshot.style.cursor = 'pointer';
     headshot.addEventListener('click', (e) => {
       e.stopPropagation();
-      modalImg.src = headshot.src;
-      setModalStyle(true);
-      modal.style.display = 'flex';
+      lightboxImg.src = headshot.src;
+      setLightboxStyle(true);
+      lightboxModal.style.display = 'flex';
     });
   }
 
-  // 6. Final console hint
+  // --- 7. Modal for project items (CV page) and journal entries (journal page) ---
+  // Helper to set up modal for a given selector and modal ID
+  function setupExpandableModal(selector, modalId) {
+    const modalOverlay = document.getElementById(modalId);
+    if (!modalOverlay) return;   // modal not present on this page
+    const modalContent = modalOverlay.querySelector('.modal-content');
+    if (!modalContent) return;
+
+    // Close modal when clicking overlay background
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+        setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+      }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        modalOverlay.classList.remove('active');
+        setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+      }
+    });
+
+    // Attach click to each target element
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', (e) => {
+        // Don't trigger if clicking inside a button or link
+        if (e.target.closest('.btn-view, .btn-download, a, button')) return;
+
+        const clone = el.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.style.cursor = 'default';
+        clone.style.margin = '0';
+        clone.style.padding = '0';
+        clone.classList.add('modal-clone');
+
+        modalContent.innerHTML = '';
+        modalContent.appendChild(clone);
+        modalOverlay.classList.add('active');
+      });
+    });
+  }
+
+  // Apply to project items (CV page) and journal entries (journal page)
+  setupExpandableModal('.project-item', 'project-modal');
+  setupExpandableModal('.journal-entry', 'journal-modal');
+
+  // --- Final console hint ---
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
+
