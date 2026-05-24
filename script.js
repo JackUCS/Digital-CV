@@ -171,73 +171,20 @@ document.addEventListener('DOMContentLoaded', () => {
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
-  // --- 8. GitHub choice modal and interactive image modal ---
+  // --- 8. GitHub interactive image modal (direct, no choice) ---
   const githubTriggers = document.querySelectorAll('#github-choice-trigger');
-  const choiceModal = document.getElementById('github-choice-modal');
   const imageModal = document.getElementById('github-image-modal');
 
-  if (githubTriggers.length && choiceModal && imageModal) {
-    // Open choice modal when any GitHub trigger is clicked
+  if (githubTriggers.length && imageModal) {
+    // Open image modal directly when any GitHub trigger is clicked
     githubTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
-        choiceModal.classList.add('active');
-      });
-    });
-
-    // Close choice modal when clicking overlay
-    choiceModal.addEventListener('click', (e) => {
-      if (e.target === choiceModal) {
-        choiceModal.classList.remove('active');
-      }
-    });
-
-    // Close image modal when clicking overlay
-    imageModal.addEventListener('click', (e) => {
-      if (e.target === imageModal) {
-        imageModal.classList.remove('active');
-        const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper && imageModal.parallaxEffect) {
-          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
-          delete imageModal.parallaxEffect;
-          wrapper.style.transform = '';
-        }
-      }
-    });
-
-    // Escape key closes both modals
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (choiceModal.classList.contains('active')) choiceModal.classList.remove('active');
-        if (imageModal.classList.contains('active')) {
-          imageModal.classList.remove('active');
-          const wrapper = imageModal.querySelector('.github-image-wrapper');
-          if (wrapper && imageModal.parallaxEffect) {
-            imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
-            delete imageModal.parallaxEffect;
-            wrapper.style.transform = '';
-          }
-        }
-      }
-    });
-
-    // "View on GitHub" button
-    const externalBtn = document.getElementById('github-view-external');
-    if (externalBtn) {
-      externalBtn.addEventListener('click', () => {
-        window.open('https://github.com/JackUCS', '_blank');
-        choiceModal.classList.remove('active');
-      });
-    }
-
-    // "View interactive image" button
-    const imageBtn = document.getElementById('github-view-image');
-    if (imageBtn) {
-      imageBtn.addEventListener('click', () => {
-        choiceModal.classList.remove('active');
         imageModal.classList.add('active');
+        
+        // Attach parallax effect to the wrapper
         const wrapper = imageModal.querySelector('.github-image-wrapper');
-        if (wrapper) {
+        if (wrapper && !imageModal.parallaxEffect) {
           const parallaxEffect = (e) => {
             const rect = imageModal.getBoundingClientRect();
             const mouseX = (e.clientX - rect.left) / rect.width;
@@ -250,14 +197,40 @@ document.addEventListener('DOMContentLoaded', () => {
           imageModal.parallaxEffect = parallaxEffect;
         }
       });
-    }
+    });
 
-    // --- NEW: Make the interactive image itself clickable to open GitHub ---
-    const interactiveImg = document.querySelector('.github-interactive-img');
-    if (interactiveImg) {
-      interactiveImg.addEventListener('click', () => {
+    // Close modal when clicking overlay
+    imageModal.addEventListener('click', (e) => {
+      if (e.target === imageModal) {
+        imageModal.classList.remove('active');
+        const wrapper = imageModal.querySelector('.github-image-wrapper');
+        if (wrapper && imageModal.parallaxEffect) {
+          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
+          delete imageModal.parallaxEffect;
+          wrapper.style.transform = '';
+        }
+      }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && imageModal.classList.contains('active')) {
+        imageModal.classList.remove('active');
+        const wrapper = imageModal.querySelector('.github-image-wrapper');
+        if (wrapper && imageModal.parallaxEffect) {
+          imageModal.removeEventListener('mousemove', imageModal.parallaxEffect);
+          delete imageModal.parallaxEffect;
+          wrapper.style.transform = '';
+        }
+      }
+    });
+
+    // Make the interactive image wrapper clickable to open GitHub
+    const interactiveWrapper = document.querySelector('.github-image-wrapper');
+    if (interactiveWrapper) {
+      interactiveWrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
         window.open('https://github.com/JackUCS', '_blank');
-        // Optionally close the modal after click
         imageModal.classList.remove('active');
         const wrapper = imageModal.querySelector('.github-image-wrapper');
         if (wrapper && imageModal.parallaxEffect) {
@@ -269,5 +242,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- 9. Theme Toggle (Dark/Light Mode) ---
+  const themeToggle = document.getElementById('theme-btn');
+  const htmlElement = document.documentElement;
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        htmlElement.setAttribute('data-theme', 'light');
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+      }
+    });
+  }
+
+  // --- 10. Fade-in on scroll using Intersection Observer ---
+  const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  
+  fadeElements.forEach(el => observer.observe(el));
+
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
+
+  // --- 11. Interactive Grid Background ---
+  const gridContainer = document.getElementById("grid-bg");
+  const blockSize = 60;
+
+  function createGrid() {
+    if (!gridContainer) return;
+    gridContainer.innerHTML = "";
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const columns = Math.ceil(width / blockSize);
+    const rows = Math.ceil(height / blockSize);
+    const totalBlocks = columns * rows;
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < totalBlocks; i++) {
+      const block = document.createElement("div");
+      block.classList.add("grid-block");
+      fragment.appendChild(block);
+    }
+    gridContainer.appendChild(fragment);
+  }
+
+  createGrid();
+
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      createGrid();
+    }, 150);
+  });
+
+// Journal teaser modal (optional)
+const journalTeaser = document.querySelector('.journal-teaser');
+const journalModal = document.getElementById('journal-preview-modal');
+if (journalTeaser && journalModal) {
+  journalTeaser.style.cursor = 'pointer';
+  journalTeaser.addEventListener('click', (e) => {
+    if (e.target.closest('.btn-view')) return; // don't open modal if clicking the button
+    journalModal.classList.add('active');
+  });
+  // Close modal on overlay click
+  journalModal.addEventListener('click', (e) => {
+    if (e.target === journalModal) {
+      journalModal.classList.remove('active');
+    }
+  });
+}

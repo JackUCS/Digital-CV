@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+
+<!-- Interactive Grid Background -->
+<div class="grid-background" id="grid-bg"></div>
+
 <div class="container">
 
   <!-- Navigation Bar -->
@@ -22,6 +26,29 @@
         <li><a href="/" class="nav-link active"><i class="fas fa-user"></i> CV</a></li>
         <li><a href="/journal" class="nav-link"><i class="fas fa-book-open"></i> Journal</a></li>
         <li><a href="#" id="github-choice-trigger" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">
+            <div class="toggle-thumb">
+              <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <g class="sun-beams">
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </g>
+                <mask id="moon-mask">
+                  <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                  <circle class="mask-cutout" cx="24" cy="4" r="7" fill="black" />
+                </mask>
+                <circle class="theme-icon-center" cx="12" cy="12" r="7" fill="currentColor" mask="url(#moon-mask)"></circle>
+              </svg>
+            </div>
+          </button>
+        </li>
       </ul>
       <div class="nav-toggle">
         <i class="fas fa-bars"></i>
@@ -188,6 +215,27 @@
             </div>
           </div>
 
+          <!-- Journal Teaser -->
+          <div class="project-item journal-teaser">
+            <div class="project-title">
+              <i class="fas fa-book-open"></i> Latest from my Journal
+            </div>
+            <div class="tech-stack">
+              <i class="fas fa-pen-fancy"></i> Professional reflections
+            </div>
+            <div>
+              <p><strong>Read my latest entry:</strong><br> "Deploying a custom domain on Railway – 24 May 2026"</p>
+              <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-secondary);">
+                Click to view all 11 journal entries →
+              </p>
+            </div>
+            <div class="button-group">
+              <a href="/journal" class="btn-view">
+                <i class="fas fa-book-open"></i> Read full journal
+              </a>
+            </div>
+          </div>
+
         </div> <!-- end key projects section -->
       </div> <!-- end right-col -->
     </div> <!-- end two-col -->
@@ -204,7 +252,6 @@
   </div>
 </div>
 
-<!-- GitHub choice modal -->
 <!-- GitHub choice modal -->
 <div id="github-choice-modal" class="modal-overlay">
   <div class="modal-container github-choice-container">
@@ -224,6 +271,24 @@
   <div class="modal-container github-interactive-container">
     <div class="github-image-wrapper">
       <img src="images/gitscreenshot.png" alt="GitHub Profile Screenshot" class="github-interactive-img">
+    </div>
+  </div>
+</div>
+
+<!-- Modal for journal preview -->
+<div id="journal-preview-modal" class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-content">
+      <h3><i class="fas fa-book-open"></i> Professional Journal</h3>
+      <p>Here's a preview of my latest entry:</p>
+      <hr>
+      <div class="journal-preview">
+        <p><strong>24 May 2026 – Deploying a custom domain on Railway</strong></p>
+        <p>Getting <code>jackcv.xyz</code> live was harder than expected. I had to configure CNAME and TXT records on Namecheap...</p>
+      </div>
+      <div class="button-group" style="margin-top: 1rem;">
+        <a href="/journal" class="btn-view">Read full journal →</a>
+      </div>
     </div>
   </div>
 </div>

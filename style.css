@@ -1,27 +1,106 @@
+/* ============================================
+   INTERACTIVE GRID BACKGROUND
+   ============================================ */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-auto-rows: 60px;
+  gap: 1px;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+.grid-block {
+  background-color: var(--grid-bg-start);
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.8s ease-out;
+}
+
+.grid-block:hover {
+  background-color: var(--grid-bg-hover);
+  transition: background-color 0s;
+}
+
+/* Theme-aware grid colours */
+[data-theme="light"] {
+  --grid-bg-start: #eef2f9;
+  --grid-bg-hover: #c0d4f0;
+}
+
+[data-theme="dark"] {
+  --grid-bg-start: #0a0a0a;
+  --grid-bg-hover: #2a3a4a;
+}
+
+/* Ensure container sits above grid */
+.container {
+  position: relative;
+  z-index: 1;
+  background: var(--container-bg);
+  backdrop-filter: blur(0px);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Color System Tokens */
+[data-theme="light"] {
+  --bg-color: #f5f7fc;
+  --container-bg: rgba(255, 255, 255, 0.96);
+  --card-bg: #ffffff;
+  --border-color: #ecf3fa;
+  --text-primary: #1a2c3e;
+  --text-secondary: #5b6e8c;
+  --toggle-bg: #e2e2e2;
+  --toggle-border: #dbdbdb;
+  --thumb-bg: #ffffff;
+  --icon-color: #000000;
+  --thumb-translate: translateX(42px);
+}
+
+[data-theme="dark"] {
+  --bg-color: #0a0a0a;
+  --container-bg: rgba(18, 25, 35, 0.96);
+  --card-bg: #1a2a3a;
+  --border-color: #2a3a4a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0b0c0;
+  --toggle-bg: #1a1a1a;
+  --toggle-border: #262626;
+  --thumb-bg: #333333;
+  --icon-color: #ffffff;
+  --thumb-translate: translateX(0px);
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fc 0%, #eef2f9 100%);
-  color: #1a2c3e;
+  background: var(--bg-color);
+  color: var(--text-primary);
   line-height: 1.5;
   padding: 2rem 1rem;
+  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.96);
+  background: var(--container-bg);
   border-radius: 32px;
   box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.02);
   overflow: hidden;
+  transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Navbar styles – drop down menu */
+/* Navbar styles – unchanged (stays dark) */
 .navbar {
   background: #0d2f48;
   padding: 0.5rem 2rem;
@@ -56,6 +135,7 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav-link {
@@ -134,7 +214,7 @@ body {
   }
 }
 
-/* header gradient */
+/* header gradient – stays the same */
 .cv-header {
   background: linear-gradient(135deg, #1a4a6e 0%, #2a6a8e 100%);
   color: white;
@@ -213,9 +293,10 @@ body {
 
 .section {
   margin-bottom: 2rem;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 24px;
   padding: 0.2rem 0;
+  transition: background 0.3s ease;
 }
 
 .section-title {
@@ -234,39 +315,39 @@ body {
 
 .job-title, .project-title {
   font-weight: 700;
-  color: #0f2b3d;
+  color: var(--text-primary);
   font-size: 1.05rem;
 }
 
 .date {
   font-size: 0.8rem;
-  color: #5b6e8c;
+  color: var(--text-secondary);
   margin-bottom: 0.4rem;
   letter-spacing: -0.2px;
 }
 
-.skill-tag {
+.skill-tag, .skill-link {
   display: inline-block;
-  background: #e6f0ff;
-  color: #2c5f8a;
+  background: var(--card-bg);
+  color: var(--text-primary);
   padding: 0.25rem 0.8rem;
   border-radius: 40px;
   font-size: 0.75rem;
   font-weight: 500;
   margin: 0.2rem 0.3rem;
   transition: all 0.15s;
-  border: 1px solid rgba(79,158,255,0.2);
+  border: 1px solid var(--border-color);
+  text-decoration: none;
 }
 
-.skill-tag:hover {
-  background: #d4e6ff;
+.skill-tag:hover, .skill-link:hover {
+  background: var(--border-color);
   transform: translateY(-1px);
 }
 
 .project-item, .education-item {
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #ecf3fa;
+  border-bottom: none;
+  transition: border-color 0.3s ease;
 }
 
 .project-item:last-child {
@@ -320,7 +401,8 @@ body {
 hr {
   margin: 1.8rem 0 1rem;
   border: none;
-  border-top: 1px solid #e0e9f2;
+  border-top: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .custom-link {
@@ -425,46 +507,74 @@ ul li::before {
   display: inline-block;
 }
 
-/* Skill links – clickable documentation links */
-.skill-link {
-  display: inline-block;
-  background: #e6f0ff;
-  color: #2c5f8a;
-  padding: 0.25rem 0.8rem;
-  border-radius: 40px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin: 0.2rem 0.3rem;
-  transition: all 0.15s;
-  border: 1px solid rgba(79,158,255,0.2);
-  text-decoration: none;
-}
-
-.skill-link:hover {
-  background: #d4e6ff;
-  transform: translateY(-1px);
-  color: #1a4a6e;
-}
-
-/* Hover effect for project items – smooth pop-out */
+/* ============================================
+   PROJECT CARD HOVER EFFECT (Unified smooth zoom)
+   ============================================ */
 .project-item {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), 
+              box-shadow 0.3s ease, 
+              background-color 0.2s ease;
   border-radius: 16px;
   padding: 1rem 1rem 0.75rem 1rem;
   margin-left: -1rem;
   margin-right: -1rem;
   background-color: transparent;
+  overflow: visible;
 }
 
+/* Light mode hover - smooth zoom */
 .project-item:hover {
   transform: scale(1.02);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
-  background-color: #ffffff;
-  z-index: 1;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+  background-color: var(--card-bg);
+  z-index: 2;
   position: relative;
 }
 
-/* Modal overlay – liquid glass background */
+/* Dark mode specific padding */
+[data-theme="dark"] .project-item {
+  padding: 1.2rem 1.2rem 0.95rem 1.2rem;
+  margin-left: -0.2rem;
+  margin-right: -0.2rem;
+}
+
+/* Dark mode hover - stronger scale, SAME transition */
+[data-theme="dark"] .project-item:hover {
+  transform: scale(1.04);
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(79, 158, 255, 0.2);
+  background-color: var(--card-bg);
+  z-index: 2;
+  position: relative;
+}
+/* Dark mode specific padding (more breathing room) */
+[data-theme="dark"] .project-item {
+  padding: 1.2rem 1.2rem 0.95rem 1.2rem;
+  margin-left: -0.2rem;
+  margin-right: -0.2rem;
+}
+
+[data-theme="dark"] .section {
+  padding: 0.5rem 1rem;
+}
+
+/* ============================================
+   FADE-IN ON SCROLL
+   ============================================ */
+.project-item, .section, .journal-entry {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.project-item.fade-in, .section.fade-in, .journal-entry.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -492,20 +602,19 @@ ul li::before {
   width: 90%;
   max-height: 85vh;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--card-bg);
   border-radius: 32px;
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
   padding: 2rem;
   position: relative;
   transform: scale(0.95);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .modal-overlay.active .modal-container {
   transform: scale(1);
 }
 
-/* Close button (optional) */
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -520,7 +629,6 @@ ul li::before {
   color: #1a4a6e;
 }
 
-/* Ensure cloned content inside modal uses same styles as original */
 .modal-content .project-title,
 .modal-content .tech-stack,
 .modal-content .button-group {
@@ -538,7 +646,10 @@ ul li::before {
 .modal-content .button-group {
   margin-top: 1.5rem;
 }
-/* GitHub choice modal specific */
+
+/* ============================================
+   GITHUB MODAL STYLES
+   ============================================ */
 .github-choice-container {
   max-width: 450px;
   text-align: center;
@@ -552,7 +663,7 @@ ul li::before {
 
 .github-choice-content p {
   margin-bottom: 1.5rem;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .github-buttons {
@@ -566,16 +677,15 @@ ul li::before {
   min-width: 160px;
 }
 
-/* GitHub interactive image modal – cursor-following 3D tilt */
 .github-interactive-container {
   max-width: 800px;
   width: 90%;
-  background: transparent;  /* was rgba(255,255,255,0.98) */
+  background: transparent;
   border-radius: 24px;
-  padding: 0;               /* remove padding */
+  padding: 0;
   perspective: 1000px;
   overflow: visible;
-  box-shadow: none;         /* remove shadow, let image cast its own */
+  box-shadow: none;
 }
 
 .github-image-wrapper {
@@ -584,9 +694,9 @@ ul li::before {
   transition: transform 0.1s ease-out;
   transform-style: preserve-3d;
   will-change: transform;
+  cursor: pointer;
 }
 
-/* Remove pointer-events: none to make the image clickable */
 .github-interactive-img {
   width: 100%;
   height: auto;
@@ -596,7 +706,91 @@ ul li::before {
   cursor: pointer;
 }
 
-/* Make the interactive image clickable */
-.github-interactive-img {
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+.theme-toggle {
+  width: 86px;
+  height: 40px;
+  background-color: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: 50px;
+  padding: 3px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--toggle-bg);
+}
+
+.toggle-thumb {
+  width: 34px;
+  height: 34px;
+  background-color: var(--thumb-bg);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--icon-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: var(--thumb-translate);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  transform: rotate(-40deg);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-icon-center {
+  transition: r 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mask-cutout {
+  transition: cx 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              cy 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sun-beams {
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: center;
+  transition: opacity 0.3s ease, 
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .theme-icon {
+  transform: rotate(0deg);
+}
+
+[data-theme="light"] .theme-icon-center {
+  r: 5px;
+}
+
+[data-theme="light"] .mask-cutout {
+  cx: 30px;
+  cy: 0px;
+}
+
+[data-theme="light"] .sun-beams {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.1s;
+}
+.project-item.fade-in {
+  opacity: 1;
+  transform: translateY(0);  /* this is fine, but hover needs higher priority */
+}
+
+/* Ensure hover always wins */
+.project-item:hover {
+  transform: scale(1.02) !important;  /* temporary test – remove if works */
 }

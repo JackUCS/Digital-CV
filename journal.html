@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,22 +13,49 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+
+<!-- Interactive Grid Background -->
+<div class="grid-background" id="grid-bg"></div>
+
 <div class="container">
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar with Theme Toggle -->
   <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">JJ</a>
-      <ul class="nav-menu">
-        <li><a href="/" class="nav-link"><i class="fas fa-user"></i> CV</a></li>
-        <li><a href="/journal" class="nav-link active"><i class="fas fa-book-open"></i> Journal</a></li>
-        <li><a href="https://github.com/JackUCS" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
-      </ul>
-      <div class="nav-toggle">
-        <i class="fas fa-bars"></i>
-      </div>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">JJ</a>
+    <ul class="nav-menu">
+      <li><a href="/" class="nav-link"><i class="fas fa-user"></i> CV</a></li>
+      <li><a href="/journal" class="nav-link active"><i class="fas fa-book-open"></i> Journal</a></li>
+      <li><a href="#" id="github-choice-trigger" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
+      <li>
+        <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">
+          <div class="toggle-thumb">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <g class="sun-beams">
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </g>
+              <mask id="moon-mask">
+                <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                <circle class="mask-cutout" cx="24" cy="4" r="7" fill="black" />
+              </mask>
+              <circle class="theme-icon-center" cx="12" cy="12" r="7" fill="currentColor" mask="url(#moon-mask)"></circle>
+            </svg>
+          </div>
+        </button>
+      </li>
+    </ul>
+    <div class="nav-toggle">
+      <i class="fas fa-bars"></i>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <div class="cv-header">
     <div class="header-flex">
@@ -51,13 +78,13 @@
         <div class="section">
           <div class="section-title">Key Themes</div>
           <ul>
-          <li><i class="fas fa-check-circle"></i> Regex & algorithm optimisation</li>
-          <li><i class="fas fa-check-circle"></i> Railway cloud deployment & DNS</li>
-          <li><i class="fas fa-check-circle"></i> Database scaling (4k+ records)</li>
-          <li><i class="fas fa-check-circle"></i> OWASP cyber security frameworks</li>
-          <li><i class="fas fa-check-circle"></i> Lighthouse 94 & WCAG accessibility</li>
-          <li><i class="fas fa-check-circle"></i> Git/GitHub version control</li>
-        </ul>
+            <li><i class="fas fa-check-circle"></i> Regex & algorithm optimisation</li>
+            <li><i class="fas fa-check-circle"></i> Railway cloud deployment & DNS</li>
+            <li><i class="fas fa-check-circle"></i> Database scaling (4k+ records)</li>
+            <li><i class="fas fa-check-circle"></i> OWASP cyber security frameworks</li>
+            <li><i class="fas fa-check-circle"></i> Lighthouse 94 & WCAG accessibility</li>
+            <li><i class="fas fa-check-circle"></i> Git/GitHub version control</li>
+          </ul>
         </div>
         <div class="section">
           <div class="section-title">Journal Archive</div>
@@ -84,7 +111,7 @@
 
           <div class="journal-entries">
 
-            <!-- Entry 1: SCDV43 Cyber Security CW1 – 9 Dec 2025 -->
+            <!-- Entry 1 -->
             <div id="entry1" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 9 December 2025</span>
@@ -98,7 +125,7 @@
               </div>
             </div>
 
-            <!-- Entry 2: SCDV45 Data Science CW1 – 13 Jan 2026 -->
+            <!-- Entry 2 -->
             <div id="entry2" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 13 January 2026</span>
@@ -112,7 +139,7 @@
               </div>
             </div>
 
-            <!-- Entry 3: SCDV41 Programming CW1 – 15 Jan 2026 -->
+            <!-- Entry 3 -->
             <div id="entry3" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 15 January 2026</span>
@@ -126,7 +153,7 @@
               </div>
             </div>
 
-            <!-- Entry 4: SCDV42 Web Dev CW1 – 22 Jan 2026 -->
+            <!-- Entry 4 -->
             <div id="entry4" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 22 January 2026</span>
@@ -140,7 +167,7 @@
               </div>
             </div>
 
-            <!-- Entry 5: SCDV43 Cyber Security CW2 – 24 Mar 2026 -->
+            <!-- Entry 5 -->
             <div id="entry5" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 24 March 2026</span>
@@ -154,7 +181,7 @@
               </div>
             </div>
 
-            <!-- Entry 6: SCDV42 Web Dev CW2 – 23 Apr 2026 -->
+            <!-- Entry 6 -->
             <div id="entry6" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 23 April 2026</span>
@@ -168,7 +195,7 @@
               </div>
             </div>
 
-            <!-- Entry 7: SCDV44 Network Design CW2 – 28 Apr 2026 -->
+            <!-- Entry 7 -->
             <div id="entry7" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 28 April 2026</span>
@@ -182,7 +209,7 @@
               </div>
             </div>
 
-            <!-- Entry 8: SCDV41 Programming CW2 – 7 May 2026 (with GitHub link) -->
+            <!-- Entry 8 -->
             <div id="entry8" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 7 May 2026</span>
@@ -201,7 +228,7 @@
               </div>
             </div>
 
-            <!-- Entry 9: SCDV45 Data Science CW2 – 19 May 2026 -->
+            <!-- Entry 9 -->
             <div id="entry9" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 19 May 2026</span>
@@ -215,7 +242,7 @@
               </div>
             </div>
 
-            <!-- Entry 10: Cloud MySQL Database (Roblox) – Independent Project (with GitHub links) -->
+            <!-- Entry 10 -->
             <div id="entry10" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 24 May 2026</span>
@@ -225,10 +252,10 @@
                 I built a Discord bot that scans guilds for user‑specified keywords and logs Roblox profile links into a Railway MySQL database. The bot runs on a real account token, scrapes confidence values using regex, and automatically inserts structured data (Discord ID, Roblox ID, username, confidence score). To date, it has systematically collected over 4,000 records. I also implemented duplicate detection and confidence scoring to maintain data quality. This is my largest independent database project.
               </div>
               <div class="entry-reflection">
-                <i class="fas fa-lightbulb"></i> Reflection: interracting with a larger scale database compared to former assignments introduced new challenges, i had to strongly consider how data would be managed safely. Using environment variables to store sensitive information such as database credentials and user and bot tokens, in the future I would like to build an external dashboard to visualise the data outside of the application and outside of viewing the database in the terminal / vscode I'd also like to implement automated backups.
+                <i class="fas fa-lightbulb"></i> Reflection: Interacting with a larger scale database compared to former assignments introduced new challenges, I had to strongly consider how data would be managed safely. Using environment variables to store sensitive information such as database credentials and user and bot tokens, in the future I would like to build an external dashboard to visualise the data outside of the application and outside of viewing the database in the terminal / vscode I'd also like to implement automated backups.
                 <div style="margin-top: 0.6rem;">
                   <a href="https://github.com/JackUCS/PublicInterface" target="_blank" style="color: #4f9eff; text-decoration: none; margin-right: 1rem;">
-                    <i class="fab fa-github"></i> Public Interface Bot <br>
+                    <i class="fab fa-github"></i> Public Interface Bot
                   </a>
                   <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" target="_blank" style="color: #4f9eff; text-decoration: none;">
                     <i class="fab fa-github"></i> Account Token Bot
@@ -237,7 +264,7 @@
               </div>
             </div>
 
-            <!-- Entry 11: CV Website Deployment – Independent Project (with GitHub link) -->
+            <!-- Entry 11 -->
             <div id="entry11" class="journal-entry">
               <div class="entry-header">
                 <span class="entry-date"><i class="far fa-calendar-alt"></i> 24 May 2026</span>
@@ -272,5 +299,15 @@
     <div class="modal-content"></div>
   </div>
 </div>
+
+<!-- Modal for the interactive GitHub screenshot -->
+<div id="github-image-modal" class="modal-overlay">
+  <div class="modal-container github-interactive-container">
+    <div class="github-image-wrapper">
+      <img src="images/gitscreenshot.png" alt="GitHub Profile Screenshot" class="github-interactive-img">
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
