@@ -13,6 +13,22 @@
 </head>
 <body>
 <div class="container">
+
+  <!-- Navigation Bar – journal style with JJ logo and burger toggle -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">JJ</a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active"><i class="fas fa-user"></i> CV</a></li>
+        <li><a href="journal.html" class="nav-link"><i class="fas fa-book-open"></i> Journal</a></li>
+        <li><a href="https://github.com/JackUCS" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a></li>
+      </ul>
+      <div class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
   <div class="cv-header">
     <div class="header-flex">
       <div class="header-text">
@@ -33,21 +49,21 @@
         <div class="section">
           <div class="section-title">Technical Skills</div>
           <div>
-            <span class="skill-tag">C#</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">HTML5/CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Bootstrap</span>
+            <a href="https://docs.microsoft.com/en-us/dotnet/csharp/" target="_blank" class="skill-link">C#</a>
+            <a href="https://www.python.org/" target="_blank" class="skill-link">Python</a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="skill-link">HTML5/CSS3</a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-link">JavaScript</a>
+            <a href="https://getbootstrap.com/" target="_blank" class="skill-link">Bootstrap</a>
             <span class="skill-tag">Python Packages (Pandas, NumPy, matplotlib, scikit‑learn, discord.py, discord.py-self)</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">MySQL Workbench</span>
-            <span class="skill-tag">Railway (TCP proxy)</span>
-            <span class="skill-tag">Git/GitHub</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Cisco Packet Tracer</span>
-            <span class="skill-tag">VLAN/OSPF</span>
-            <span class="skill-tag">OWASP</span>
+            <a href="https://www.w3schools.com/sql/" target="_blank" class="skill-link">SQL</a>
+            <a href="https://www.mysql.com/products/workbench/" target="_blank" class="skill-link">MySQL Workbench</a>
+            <a href="https://docs.railway.app/" target="_blank" class="skill-link">Railway (TCP proxy)</a>
+            <a href="https://git-scm.com/" target="_blank" class="skill-link">Git/GitHub</a>
+            <a href="https://code.visualstudio.com/" target="_blank" class="skill-link">VS Code</a>
+            <a href="https://www.figma.com/" target="_blank" class="skill-link">Figma</a>
+            <a href="https://www.netacad.com/courses/packet-tracer" target="_blank" class="skill-link">Cisco Packet Tracer</a>
+            <a href="https://www.cisco.com/c/en/us/solutions/enterprise-networks/what-is-vlan.html" target="_blank" class="skill-link">VLAN/OSPF</a>
+            <a href="https://owasp.org/" target="_blank" class="skill-link">OWASP</a>
           </div>
         </div>
         <div class="section">
@@ -85,8 +101,8 @@
           <!-- 1. Personal Portfolio Website & Cloud Deployment -->
           <div class="project-item">
             <div class="project-title"><i class="fas fa-globe"></i> Personal Portfolio Website & Cloud Deployment (Independent)</div>
-            <div class="tech-stack"><i class="fas fa-code"></i> HTML5, CSS3, JavaScript, Railway, Namecheap, DNS (CNAME, TXT, ALIAS)</div>
-            <div>Designed and developed a responsive, mobile‑first CV website from scratch. Implemented a modern UI with flexbox layouts, skill tags, dynamic copyright year via JavaScript, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) using ALIAS and TXT verification records, and resolved DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
+            <div class="tech-stack"><i class="fas fa-code"></i> HTML5, CSS3, JavaScript, Railway, Namecheap, DNS (CNAME, TXT)</div>
+            <div>Designed and developed a responsive, mobile‑first CV website from scratch. Implemented a modern UI with flexbox layouts, skill tags, dynamic copyright year via JavaScript, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) using CNAME and TXT verification records, and resolved DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
             <div class="button-group">
               <a href="https://jackcv.xyz" class="btn-view" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Live Site (You are here)</a>
               <a href="https://github.com/JackUCS/Digital-CV" class="btn-view" target="_blank">
@@ -104,7 +120,7 @@
               <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank">
                 <i class="fab fa-github"></i> Public Interface
               </a>
-              <a href="https://github.com/JackUCS/RBLXMonitoringSelf" class="btn-view" target="_blank">
+              <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" class="btn-view" target="_blank">
                 <i class="fab fa-github"></i> Bot using account tokens
               </a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-cloudsql"><i class="fas fa-camera"></i> Screenshots & Explanation</button>
@@ -119,7 +135,7 @@
 
           <!-- 3. Enterprise Network Services with Active Directory (Independent) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-building"></i> Enterprise Network Services with Active Directory</div>
+            <div class="project-title"><i class="fas fa-building"></i> Enterprise Network Services with Active Directory (Independent & University)</div>
             <div class="tech-stack"><i class="fas fa-server"></i> Windows Server, VirtualBox, DNS, DHCP, Group Policy</div>
             <div>Designed and deployed a complete corporate network on a virtual machine, transforming a standard Windows Server into a fully functional Domain Controller. Centralised user authentication and policy management for a simulated business, effectively integrating core network services (DNS, DHCP) with Active Directory.</div>
             <div class="button-group">
@@ -136,7 +152,7 @@
 
           <!-- 4. Unicorn Badminton Club Website Redesign (SCDV42) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-table-tennis"></i> Unicorn Badminton Club Website Redesign (SCDV42)</div>
+            <div class="project-title"><i class="fas fa-table-tennis"></i> Unicorn Badminton Club Website Redesign (SCDV42 University)</div>
             <div class="tech-stack"><i class="fab fa-html5"></i> HTML5, CSS3, JavaScript, Bootstrap, Figma, Git</div>
             <div>Mobile‑first responsive redesign, dark mode toggle, Successful deployment of a website, Lighthouse performance score 94. Fixed accessibility issues and replaced unlicensed images.</div>
             <div class="button-group">
@@ -153,19 +169,9 @@
             </div>
           </div>
 
-          <!-- 5. Bright Future Charity Risk Assessment (SCDV43) -->
+          <!-- 5. Dropship Two‑Site Network Design (SCDV44) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-shield-alt"></i> Bright Future Charity Risk Assessment (SCDV43)</div>
-            <div class="tech-stack"><i class="fas fa-chart-line"></i> OWASP Top 10, MFA, IDPS, risk matrix</div>
-            <div>Identified broken access control and cryptographic failures. Proposed MFA, employee training, and IDPS (Suricata) to prevent ransomware.</div>
-            <div class="button-group">
-              <a href="assignments/SCDV43_CW2_JEF25003751_Jack_Jeffery_Cyber 1.docx" class="btn-view" target="_blank"><i class="fas fa-file-alt"></i> View Assignment (DOCX)</a>
-            </div>
-          </div>
-
-          <!-- 6. Dropship Two‑Site Network Design (SCDV44) -->
-          <div class="project-item">
-            <div class="project-title"><i class="fas fa-network-wired"></i> Dropship Two‑Site Network Design (SCDV44)</div>
+            <div class="project-title"><i class="fas fa-network-wired"></i> Dropship Two‑Site Network Design (SCDV44 University)</div>
             <div class="tech-stack"><i class="fas fa-microchip"></i> Cisco Packet Tracer, VLANs, OSPF, IPsec VPN</div>
             <div>Designed secure network with VLAN segmentation, site‑to‑site IPsec VPN, and router‑on‑a‑stick. Chose OSPF over RIP for faster convergence.</div>
             <div class="button-group">
@@ -178,9 +184,9 @@
             </div>
           </div>
 
-          <!-- 7. E‑commerce Database & Sales Prediction (SCDV45) -->
+          <!-- 6. E‑commerce Database & Sales Prediction (SCDV45) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-chart-line"></i> E‑commerce Database & Sales Prediction (SCDV45)</div>
+            <div class="project-title"><i class="fas fa-chart-line"></i> E‑commerce Database & Sales Prediction (SCDV45 University)</div>
             <div class="tech-stack"><i class="fas fa-database"></i> MySQL, Python, Pandas, scikit‑learn, SQLAlchemy</div>
             <div>Designed a relational database (Customers, Products, Orders – 50+ rows). Wrote advanced SQL queries (window functions, subqueries). Built a linear regression model (R²=0.997) to predict order value.</div>
             <div class="button-group">

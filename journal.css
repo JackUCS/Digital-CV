@@ -1,0 +1,229 @@
+/* ============================================
+   JOURNAL PAGE SPECIFIC STYLES
+   For: journal.html
+   Dependencies: style.css (main CV styles)
+   ============================================ */
+
+/* --------------------------------------------
+   SMOOTH SCROLL & ANCHOR OFFSET
+--------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevents fixed header from covering the entry title when scrolling to anchor */
+.journal-entry {
+  scroll-margin-top: 80px;
+}
+
+/* --------------------------------------------
+   NAVIGATION BAR (shared with index.html)
+--------------------------------------------- */
+.journal-nav {
+  background: #1a3f55;
+  padding: 0.75rem 2rem;
+}
+
+.journal-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.journal-nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.journal-nav-link:hover {
+  color: #4f9eff;
+}
+
+.journal-nav-link.active {
+  color: #4f9eff;
+}
+
+/* --------------------------------------------
+   LEFT COLUMN – ARCHIVE LINKS
+--------------------------------------------- */
+/* Archive link styling */
+.archive-link {
+  cursor: pointer;
+  color: #2c5f8a;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.archive-link:hover {
+  color: #4f9eff;
+  text-decoration: underline;
+}
+
+.archive-link i {
+  font-size: 0.75rem;
+  color: #4f9eff;
+}
+
+/* Left column list overrides */
+.left-col ul {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.left-col ul li {
+  list-style: none;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+/* Key themes check icons */
+.left-col .fa-check-circle {
+  color: #4f9eff;
+  margin-right: 8px;
+  font-size: 0.8rem;
+}
+
+/* --------------------------------------------
+   JOURNAL ENTRIES CONTAINER
+--------------------------------------------- */
+.journal-entries {
+  margin-top: 0.5rem;
+}
+
+/* Individual journal entry */
+.journal-entry {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #ecf3fa;
+}
+
+.journal-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------
+   ENTRY HEADER (date badge + title)
+--------------------------------------------- */
+.entry-header {
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.entry-date {
+  font-size: 0.75rem;
+  color: #5b6e8c;
+  background: #eef2ff;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.entry-title {
+  font-weight: 700;
+  color: #1a3f55;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------
+   ENTRY CONTENT (main text)
+--------------------------------------------- */
+.entry-content {
+  color: #334155;
+  line-height: 1.55;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+}
+
+/* --------------------------------------------
+   REFLECTION BOX (blue background with left border)
+--------------------------------------------- */
+.entry-reflection {
+  background: #eef2ff;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #2c5f8a;
+  border-left: 3px solid #4f9eff;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.entry-reflection i {
+  margin-top: 2px;
+  color: #4f9eff;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------
+   RESPONSIVE DESIGN (mobile)
+--------------------------------------------- */
+@media (max-width: 700px) {
+  .journal-nav-container {
+    gap: 1rem;
+  }
+  
+  .journal-nav-link {
+    font-size: 0.85rem;
+  }
+  
+  .entry-header {
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-start;
+  }
+  
+  .entry-title {
+    font-size: 1rem;
+  }
+  
+  .entry-date {
+    white-space: normal;
+  }
+  
+  .entry-content {
+    font-size: 0.9rem;
+  }
+  
+  .entry-reflection {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* Optional: small screens (below 480px) */
+@media (max-width: 480px) {
+  .journal-nav {
+    padding: 0.6rem 1rem;
+  }
+  
+  .journal-nav-container {
+    gap: 0.8rem;
+  }
+  
+  .archive-link {
+    font-size: 0.8rem;
+  }
+}

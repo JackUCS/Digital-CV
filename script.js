@@ -1,3 +1,15 @@
+// Simple mobile toggle (no icon swap)
+document.addEventListener('DOMContentLoaded', function() {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+    });
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Dynamic copyright year
   const yearSpan = document.getElementById('current-year');
