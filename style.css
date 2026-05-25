@@ -1156,3 +1156,125 @@ ul li::before {
     font-size: 0.65rem;
   }
 }
+/* Typing cursor blinking animation */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  margin-left: 2px;
+  font-weight: 400;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Module stuff */
+/* Module page specific styles */
+.module-block {
+  margin-bottom: 3rem;
+}
+
+.module-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(120deg, #2c5f8a, #4f9eff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border-left: 4px solid #4f9eff;
+  padding-left: 0.75rem;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.assignment-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assignment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
+}
+
+.assignment-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 700px) {
+  .module-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .module-title {
+    font-size: 1.3rem;
+  }
+}
+/* Slow fade effect on buttons */
+.btn-view, .btn-download {
+  transition: all 0.3s ease !important;
+}
+.btn-view:hover, .btn-download:hover {
+  transform: translateY(-2px) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Grid background – ensure it's interactive */
+.grid-background {
+  pointer-events: auto;
+  z-index: 0;
+}
+.grid-block {
+  transition: background-color 0.8s ease-out;
+}
+.grid-block:hover {
+  transition: background-color 0s;
+}
+
+/* Module page grid layout (already provided) */
+.module-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 700px) {
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Assignment cards hover – same zoom effect as CV cards */
+.assignment-card {
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), 
+              box-shadow 0.3s ease,
+              background-color 0.2s ease;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.2rem;
+}
+
+.assignment-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+  background-color: var(--card-bg);
+  z-index: 2;
+  position: relative;
+}
+
+/* Dark mode stronger hover */
+[data-theme="dark"] .assignment-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(79, 158, 255, 0.2);
+}

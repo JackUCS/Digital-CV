@@ -199,19 +199,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 9. Fade-in on scroll using Intersection Observer ---
-  const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
+  // --- 9. Fade-in on scroll using Intersection Observer (disable on small screens) ---
+  const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
   
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-        observer.unobserve(entry.target);
-      }
+  if (!isSmallScreen) {
+    const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+  } else {
+    // Immediately show all elements on small screens
+    document.querySelectorAll('.project-item, .section, .journal-entry').forEach(el => {
+      el.classList.add('fade-in');
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
     });
-  }, { threshold: 0.15 });
-  
-  fadeElements.forEach(el => observer.observe(el));
+  }
 
   // --- 10. Interactive Grid Background ---
   const gridContainer = document.getElementById("grid-bg");
@@ -492,6 +501,33 @@ document.addEventListener('DOMContentLoaded', () => {
       initScratchCard();
     }
   }, 500);
+
+  // --- Hero typing effect for subtitle (reusable) ---
+  const subtitleElement = document.getElementById('typed-subtitle');
+  if (subtitleElement) {
+    const originalText = subtitleElement.innerText; // read the existing text
+    subtitleElement.innerHTML = ''; // clear it for typing
+    
+    // Create spans for text and cursor
+    const textSpan = document.createElement('span');
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = 'typing-cursor';
+    cursorSpan.innerHTML = '|';
+    subtitleElement.appendChild(textSpan);
+    subtitleElement.appendChild(cursorSpan);
+    
+    let i = 0;
+    function typeNext() {
+      if (i < originalText.length) {
+        textSpan.innerHTML += originalText.charAt(i);
+        i++;
+        setTimeout(typeNext, 80);
+      } else {
+        cursorSpan.style.animation = 'blink 1s step-end infinite';
+      }
+    }
+    typeNext();
+  }
 
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
