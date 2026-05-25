@@ -21,7 +21,7 @@ html {
 --------------------------------------------- */
 .archive-link {
   cursor: pointer;
-  color: #2c5f8a;
+  color: #fefefe;
   text-decoration: none;
   transition: color 0.2s;
   display: inline-flex;
