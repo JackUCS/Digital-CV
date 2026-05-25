@@ -175,26 +175,22 @@ document.addEventListener('DOMContentLoaded', () => {
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
-   // --- 8. Theme Toggle (Dark/Light Mode) with localStorage persistence ---
+  // --- 8. Theme Toggle (Dark/Light Mode) with localStorage persistence ---
   const themeToggle = document.getElementById('theme-btn');
   const htmlElement = document.documentElement;
 
-  // Function to set theme and save to localStorage
   function setTheme(theme) {
     htmlElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }
 
-  // Load saved theme on page load
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     setTheme(savedTheme);
   } else {
-    // Default to light theme if no saved preference
     setTheme('light');
   }
 
-  // Toggle theme when button is clicked
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const currentTheme = htmlElement.getAttribute('data-theme');
@@ -202,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTheme(newTheme);
     });
   }
+
   // --- 9. Fade-in on scroll using Intersection Observer ---
   const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
   
@@ -266,43 +263,67 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 12. Show Scratch Card when GitHub link is clicked ---
   const githubTriggers = document.querySelectorAll('#github-choice-trigger');
   const scratchCardOverlay = document.getElementById('scratch-card-wrapper');
+  const scratchAudioGlobal = document.getElementById('scratch-sound');
 
   if (githubTriggers.length && scratchCardOverlay) {
     githubTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
         scratchCardOverlay.classList.add('active');
-        // Delay canvas initialization until modal is fully visible
         setTimeout(() => {
           initScratchCard();
         }, 100);
       });
     });
 
-    // Close scratch card when clicking outside the card
     scratchCardOverlay.addEventListener('click', (e) => {
       if (e.target === scratchCardOverlay) {
         scratchCardOverlay.classList.remove('active');
+        if (scratchAudioGlobal) {
+          scratchAudioGlobal.pause();
+          scratchAudioGlobal.currentTime = 0;
+        }
+        const rewardAudio = document.getElementById('reward-sound');
+        if (rewardAudio) {
+          rewardAudio.pause();
+          rewardAudio.currentTime = 0;
+        }
       }
     });
 
-    // Close with Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && scratchCardOverlay.classList.contains('active')) {
         scratchCardOverlay.classList.remove('active');
+        if (scratchAudioGlobal) {
+          scratchAudioGlobal.pause();
+          scratchAudioGlobal.currentTime = 0;
+        }
+        const rewardAudio = document.getElementById('reward-sound');
+        if (rewardAudio) {
+          rewardAudio.pause();
+          rewardAudio.currentTime = 0;
+        }
       }
     });
   }
 
-  // --- 13. Scratch Card Canvas Initialization ---
+  // --- 13. Scratch Card Canvas Initialization with Sound ---
   let scratchCtx = null;
   let scratchCardElement = null;
   let scratchCanvasElement = null;
   let isScratchCompleted = false;
   let lastX = 0, lastY = 0;
   let isFirstMove = true;
-  const SCRATCH_THRESHOLD = 0.45;
+  const SCRATCH_THRESHOLD = 0.75;
   const BRUSH_SIZE = 32;
+  
+  const scratchAudio = document.getElementById('scratch-sound');
+  if (scratchAudio) {
+    scratchAudio.volume = 0.25;
+  }
+  
+  let lastPlayTime = 0;
+  const SOUND_INTERVAL = 450;
 
   function initScratchCard() {
     scratchCardElement = document.getElementById("interactive-card");
@@ -310,37 +331,39 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!scratchCardElement || !scratchCanvasElement) return;
     
-    // Reset state
     isScratchCompleted = false;
     isFirstMove = true;
     
-    // Set canvas size to match card
     scratchCanvasElement.width = scratchCardElement.offsetWidth;
     scratchCanvasElement.height = scratchCardElement.offsetHeight;
     
-    // Get context and draw scratch coating
     scratchCtx = scratchCanvasElement.getContext("2d");
     scratchCtx.fillStyle = "#16191b";
     scratchCtx.fillRect(0, 0, scratchCanvasElement.width, scratchCanvasElement.height);
     
-    // Add noise texture
     for (let i = 0; i < scratchCanvasElement.width; i += 2) {
       let n = Math.floor(Math.random() * 12);
       scratchCtx.fillStyle = `rgba(255, 255, 255, ${0.01 + n / 1000})`;
       scratchCtx.fillRect(i, 0, 1, scratchCanvasElement.height);
     }
     
-    // Remove completed class if present
     scratchCanvasElement.classList.remove("is-completed");
     scratchCardElement.style.cursor = "crosshair";
     
-    // Remove old click listener
     const oldClick = scratchCardElement._scratchClick;
     if (oldClick) scratchCardElement.removeEventListener("click", oldClick);
   }
 
   function scratch(x, y) {
     if (isScratchCompleted || !scratchCtx) return;
+    
+    const now = Date.now();
+    if (scratchAudio && (now - lastPlayTime) > SOUND_INTERVAL) {
+      scratchAudio.currentTime = 0;
+      scratchAudio.play().catch(e => console.log('Audio play failed:', e));
+      lastPlayTime = now;
+    }
+    
     scratchCtx.globalCompositeOperation = "destination-out";
     scratchCtx.lineJoin = "round";
     scratchCtx.lineCap = "round";
@@ -375,6 +398,19 @@ document.addEventListener('DOMContentLoaded', () => {
         isScratchCompleted = true;
         scratchCanvasElement.classList.add("is-completed");
         scratchCardElement.style.cursor = "pointer";
+        
+        if (scratchAudio) {
+          scratchAudio.pause();
+          scratchAudio.currentTime = 0;
+        }
+        
+        const rewardAudio = document.getElementById('reward-sound');
+        if (rewardAudio) {
+          rewardAudio.volume = 0.5;
+          rewardAudio.currentTime = 0;
+          rewardAudio.play().catch(e => console.log('Reward audio play failed:', e));
+        }
+        
         const clickHandler = () => {
           window.open("https://github.com/JackUCS", "_blank");
         };
@@ -384,16 +420,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 40);
   }
 
-  // Attach mouse/touch handlers to the scratch card (delegated, will work after init)
+    // Attach mouse/touch handlers to the scratch card with hover flag
   document.addEventListener('mouseover', (e) => {
     const card = e.target.closest('#interactive-card');
     if (!card) return;
     
-    // Only attach handlers if not already attached
     if (card.hasScratchHandlers) return;
     card.hasScratchHandlers = true;
     
+    let isCardHovered = false;
+    
+    card.addEventListener("mouseenter", () => {
+      isCardHovered = true;
+    });
+    
     card.addEventListener("mousemove", (e) => {
+      if (!isCardHovered) return;  // ← STOPS SCRATCHING WHEN NOT HOVERED
       if (!scratchCardElement || !scratchCanvasElement) return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -411,7 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     card.addEventListener("mouseleave", () => {
-      isFirstMove = true;
+      isCardHovered = false;      // ← IMMEDIATELY STOPS NEW SCRATCHES
+      isFirstMove = true;          // ← RESETS PATH
+      lastX = 0;                   // ← PREVENTS ROGUE LINES
+      lastY = 0;
       card.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
       card.style.transform = "rotateX(0deg) rotateY(0deg)";
       card.style.setProperty("--mx", "50%");
@@ -432,9 +477,16 @@ document.addEventListener('DOMContentLoaded', () => {
       lastY = e.touches[0].clientY - rect.top;
       isFirstMove = false;
     });
+    
+    // Optional: pointerleave for even faster detection
+    card.addEventListener("pointerleave", () => {
+      isCardHovered = false;
+      isFirstMove = true;
+      lastX = 0;
+      lastY = 0;
+    });
   });
   
-  // Initial call to set up the card if it's visible (won't work if hidden, but that's fine)
   setTimeout(() => {
     if (scratchCardOverlay && scratchCardOverlay.classList.contains('active')) {
       initScratchCard();
