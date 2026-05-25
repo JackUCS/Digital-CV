@@ -21,6 +21,17 @@ html {
 --------------------------------------------- */
 .archive-link {
   cursor: pointer;
+  color: #2c5f8a;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .archive-link {
+  cursor: pointer;
   color: #fefefe;
   text-decoration: none;
   transition: color 0.2s;
