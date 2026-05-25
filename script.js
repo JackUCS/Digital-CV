@@ -175,21 +175,33 @@ document.addEventListener('DOMContentLoaded', () => {
   setupExpandableModal('.project-item', 'project-modal');
   setupExpandableModal('.journal-entry', 'journal-modal');
 
-  // --- 8. Theme Toggle (Dark/Light Mode) ---
+   // --- 8. Theme Toggle (Dark/Light Mode) with localStorage persistence ---
   const themeToggle = document.getElementById('theme-btn');
   const htmlElement = document.documentElement;
 
+  // Function to set theme and save to localStorage
+  function setTheme(theme) {
+    htmlElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  // Load saved theme on page load
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    // Default to light theme if no saved preference
+    setTheme('light');
+  }
+
+  // Toggle theme when button is clicked
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const currentTheme = htmlElement.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        htmlElement.setAttribute('data-theme', 'light');
-      } else {
-        htmlElement.setAttribute('data-theme', 'dark');
-      }
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
     });
   }
-
   // --- 9. Fade-in on scroll using Intersection Observer ---
   const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
   
