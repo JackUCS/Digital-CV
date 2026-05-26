@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
   
   if (!isSmallScreen) {
-    const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry');
+    const fadeElements = document.querySelectorAll('.project-item, .section, .journal-entry, .assignment-card');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -211,11 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     fadeElements.forEach(el => observer.observe(el));
   } else {
     // Immediately show all elements on small screens
-    document.querySelectorAll('.project-item, .section, .journal-entry').forEach(el => {
+    document.querySelectorAll('.project-item, .section, .journal-entry, .assignment-card').forEach(el => {
       el.classList.add('fade-in');
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
