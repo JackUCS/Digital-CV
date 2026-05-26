@@ -123,7 +123,7 @@
                 I presented a seminar on ransomware attack vectors and mitigation strategies. I researched the CIA Triad, threat actors (cybercriminals, hacktivists, nation-states), and social engineering, applying it to The Bright Future Charity scenario, I proposed IDPS, UTM, MFA, and employee training as solutions.
               </div>
               <div class="entry-reflection">
-                <i class="fas fa-lightbulb"></i> Reflection: Presenting technical content to peers helped to improve my confidence and bond with peers as we were all in the same boat. Learning basic security concepts like the CIA Triad and attack vectors has made me more security-conscious in all my projects.
+                <i class="fas fa-lightbulb"></i> Reflection: Presenting technical content to peers helped to improve my confidence with peers as we were all in the same boat. Learning basic security concepts like the CIA Triad and attack vectors has made me more security-conscious in all my projects, and I am now more aware of the potential risks and how to mitigate them.
               </div>
             </div>
 
@@ -254,11 +254,11 @@
                 I built a Discord bot that scans guilds for user‑specified keywords and logs Roblox profile links into a Railway MySQL database. The bot runs on a real account token, scrapes confidence values using regex, and automatically inserts structured data (Discord ID, Roblox ID, username, confidence score). To date, it has systematically collected over 4,000 records. I also implemented duplicate detection and confidence scoring to maintain data quality. This is my largest independent database project.
               </div>
               <div class="entry-reflection">
-                <i class="fas fa-lightbulb"></i> Reflection: Interacting with a larger scale database compared to former assignments introduced new challenges, I had to strongly consider how data would be managed safely. Using environment variables to store sensitive information such as database credentials and user and bot tokens, in the future I would like to build an external dashboard to visualise the data outside of the application and outside of viewing the database in the terminal / vscode I'd also like to implement automated backups.
+                <i class="fas fa-lightbulb"></i> Reflection: Interacting with a larger scale database compared to former assignments introduced new challenges, I had to strongly consider how data would be managed safely. Using environment variables to store sensitive information such as database credentials and user and bot tokens, in the future I would like to build an external dashboard to visualise the data outside of the application and outside of viewing the database in the terminal / vscode I'd also like to have a way to implement automated backups locally, not solely relying on the security of the hosting platform.
                 <div style="margin-top: 0.6rem;">
                   <a href="https://github.com/JackUCS/PublicInterface" target="_blank" style="color: #4f9eff; text-decoration: none; margin-right: 1rem;">
                     <i class="fab fa-github"></i> Public Interface Bot
-                  </a>
+                  </a> <br> <br>
                   <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" target="_blank" style="color: #4f9eff; text-decoration: none;">
                     <i class="fab fa-github"></i> Account Token Bot
                   </a>
@@ -273,7 +273,7 @@
                 <span class="entry-title">Deploying a Custom Domain on Railway – Portfolio Website</span>
               </div>
               <div class="entry-content">
-                Getting `jackcv.xyz` live was harder than expected. I had to configure CNAME and TXT records on Namecheap, then wait for DNS propagation. The initial 502 error was because I had used URL Redirects instead of proper DNS records. After switching to the correct CNAME record for the root domain (using Namecheap's "CNAME flattening" feature) and adding the Railway TXT verification record, the site went live. I also set up a lightbox for images and Font Awesome icons for consistency.
+                Getting `jackcv.xyz` live was harder than expected. I had to configure CNAME and TXT records on Namecheap, then wait for DNS propagation. The initial 502 error was because I had used URL Redirects instead of proper DNS records. After switching to the correct CNAME record for the root domain (using Namecheap's "CNAME flattening" feature) and adding the Railway TXT verification record, the site went live. I also set up a lightbox for images and Font Awesome icons as they're cleaner than using emojis.
               </div>
               <div class="entry-reflection">
                 <i class="fas fa-lightbulb"></i> Reflection: Deployment is the final barrier to success. Since working on this portfolio website, I have better understanding of DNS, I've learnt CNAME, TXT verification, learning how to point one domain to another and the importance of waiting for DNS propagation. I have gotten better at problem-solving and debugging, I had to research common deployment issues and systematically troubleshoot until I found the solution. This experience has made me more confident in deploying future projects.
