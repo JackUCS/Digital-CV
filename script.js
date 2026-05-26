@@ -531,3 +531,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log("Pro tip: You can reach me via GitHub – links are above.");
 });
+  // --- Cursor spotlight effect (full site) ---
+  const spotlight = document.getElementById('cursor-spotlight');
+  if (spotlight) {
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      spotlight.style.setProperty('--x', x + 'px');
+      spotlight.style.setProperty('--y', y + 'px');
+    });
+  }

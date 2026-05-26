@@ -13,6 +13,9 @@
 </head>
 <body>
 
+<!-- Cursor spotlight effect -->
+<div class="cursor-spotlight" id="cursor-spotlight"></div>
+
 <!-- Interactive Grid Background -->
 <div class="grid-background" id="grid-bg"></div>
 
@@ -51,9 +54,7 @@
           </button>
         </li>
       </ul>
-      <div class="nav-toggle">
-        <i class="fas fa-bars"></i>
-      </div>
+      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
     </div>
   </nav>
 
@@ -125,24 +126,24 @@
         </div>
 
         <div class="section">
-          <div class="section-title">Key Projects & Assignments</div>
+          <div class="section-title">Independent Projects & Guided Assignments</div>
 
           <!-- 1. Personal Portfolio Website & Cloud Deployment -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-globe"></i> Personal Portfolio Website & Cloud Deployment (Independent)</div>
+            <div class="project-title"><i class="fas fa-globe"></i> Personal Portfolio Website & Cloud Deployment</div>
             <div class="tech-stack"><i class="fas fa-code"></i> HTML5, CSS3, JavaScript, Railway, Namecheap, DNS (CNAME, TXT)</div>
-            <div>Designed and developed a responsive, mobile‑first CV website from scratch. Implemented a modern UI with flexbox layouts, skill tags, dynamic copyright year via JavaScript, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) using CNAME and TXT verification records, and resolved DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
+            <div>Built a responsive, mobile‑first CV website from scratch using flexbox layouts, skill tags, dynamic JavaScript for the copyright year, and gradient colour schemes. Deployed the static site on Railway, configured a custom domain (jackcv.xyz) with CNAME and TXT records, and debugged DNS propagation issues to achieve a live, secure HTTPS endpoint.</div>
             <div class="button-group">
-              <a href="https://jackcv.xyz" class="btn-view" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Live Site (You are here)</a>
+              <a href="https://jackcv.xyz" class="btn-view" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Live Site</a>
               <a href="https://github.com/JackUCS/Digital-CV" class="btn-view" target="_blank"><i class="fab fa-github"></i> GitHub Repo</a>
             </div>
           </div>
 
-          <!-- 2. Cloud MySQL Database (Independent) -->
+          <!-- 2. Cloud MySQL Database -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-cloud"></i> Cloud MySQL Database (Independent)</div>
+            <div class="project-title"><i class="fas fa-cloud"></i> Cloud MySQL Database</div>
             <div class="tech-stack"><i class="fas fa-database"></i> MySQL, Railway (TCP proxy), Git, SQLTools</div>
-            <div>Deployed a relational database on Railway for Roblox profiles. Wrote optimised queries for duplicate detection and confidence scoring. systematically collected over 4,000 records of structured profile data.</div>
+            <div>Deployed a relational database on Railway for Roblox profiles. Wrote optimised queries for duplicate detection and confidence scoring. Systematically collected over 4,000 records of structured profile data.</div>
             <div class="button-group">
               <a href="https://github.com/JackUCS/PublicInterface" class="btn-view" target="_blank"><i class="fab fa-github"></i> Public Interface</a>
               <a href="https://github.com/JackUCS/Roblox-Monitoring-Final" class="btn-view" target="_blank"><i class="fab fa-github"></i> Bot using account tokens</a>
@@ -152,15 +153,15 @@
               <img src="images/SQLScreenshot.png" alt="Database schema" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
               <p style="font-size: 0.75rem; color: #5b6e8c; margin-bottom: 0.5rem;">Screenshot of database records</p>
               <img src="images/Result.png" alt="Query results example" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">The code is hosted on a real account token and scans a variety of guilds for user‑specified keywords that the user can predefine (e.g., "ollie") on detection the message is logged and relayed to a webhook. Roblox users (Next to the blue person) are scraped by confidence values utilising regex to identify strings that are deemed as valuable, users who send their user profile link in a specific channel will be identified as a confidence of 3 (highest possible, this will stack to ensure the program is entirely confident)</p>
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">The bot scans guilds for keywords, scrapes Roblox profiles using regex, and stores confidence scores.</p>
             </div>
           </div>
 
-          <!-- 3. Enterprise Network Services with Active Directory (Independent) -->
+          <!-- 3. Active Directory -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-building"></i> Enterprise Network Services with Active Directory (Independent & University)</div>
+            <div class="project-title"><i class="fas fa-building"></i> Enterprise Network Services with Active Directory</div>
             <div class="tech-stack"><i class="fas fa-server"></i> Windows Server, VirtualBox, DNS, DHCP, Group Policy</div>
-            <div>Designed and deployed a complete corporate network on a virtual machine, transforming a standard Windows Server into a fully functional Domain Controller. Centralised user authentication and policy management for a simulated business, effectively integrating core network services (DNS, DHCP) with Active Directory.</div>
+            <div>Designed and deployed a complete corporate network on a virtual machine, transforming a standard Windows Server into a fully functional Domain Controller. Centralised user authentication and policy management for a simulated business.</div>
             <div class="button-group">
               <a href="assignments/SCDV44_CW2_JEF25003751_Jack_Jeffery_Networking 1.docx" class="btn-view" target="_blank"><i class="fas fa-file-alt"></i> View Assignment (DOCX)</a>
               <button class="btn-view toggle-screenshot-btn" data-target="screenshot-activedirectory"><i class="fas fa-play"></i> Show Video Demo</button>
@@ -169,15 +170,15 @@
               <div class="video-container">
                 <iframe class="responsive-iframe" src="https://www.youtube-nocookie.com/embed/aEGvHdF7f94" title="Active Directory Domain Controller Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
-              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Active Directory Domain Controller / ADDS Demo.</p>
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Active Directory Domain Controller Demo.</p>
             </div>
           </div>
 
-          <!-- 4. Unicorn Badminton Club Website Redesign (SCDV42) -->
+          <!-- 4. Unicorn Badminton Club (SCDV42) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-table-tennis"></i> Unicorn Badminton Club Website Redesign (SCDV42 University)</div>
+            <div class="project-title"><i class="fas fa-table-tennis"></i> Unicorn Badminton Club Website Redesign (SCDV42)</div>
             <div class="tech-stack"><i class="fab fa-html5"></i> HTML5, CSS3, JavaScript, Bootstrap, Figma, Git</div>
-            <div>Mobile‑first responsive redesign, dark mode toggle, Successful deployment of a website, Lighthouse performance score 94. Fixed accessibility issues and replaced unlicensed images.</div>
+            <div>Mobile‑first responsive redesign, dark mode toggle, Lighthouse performance score 94. Fixed accessibility issues and replaced unlicensed images.</div>
             <div class="button-group">
               <a href="assignments/SCDV42_CW2_JEF25003751_Jack_Jeffery_Web 1.docx" class="btn-view" target="_blank"><i class="fas fa-file-alt"></i> View Assignment (DOCX)</a>
               <a href="https://github.com/JackUCS/UBC-Assignment" class="btn-view" target="_blank"><i class="fab fa-github"></i> GitHub Repo</a>
@@ -186,13 +187,13 @@
             <div id="screenshot-ubc" class="screenshot-container" style="display: none; margin-top: 1rem;">
               <img src="images/Desktop showcase.png" alt="UBC website desktop view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;">
               <img src="images/MOBILE SHOWCASE.png" alt="UBC website mobile view" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Desktop and mobile views of the redesigned site, with light and darkmode counterparts.</p>
+              <p style="font-size: 0.75rem; color: #5b6e8c; margin-top: 0.5rem;">Desktop and mobile views of the redesigned site.</p>
             </div>
           </div>
 
-          <!-- 5. Dropship Two‑Site Network Design (SCDV44) -->
+          <!-- 5. Dropship Network Design (SCDV44) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-network-wired"></i> Dropship Two‑Site Network Design (SCDV44 University)</div>
+            <div class="project-title"><i class="fas fa-network-wired"></i> Dropship Two‑Site Network Design (SCDV44)</div>
             <div class="tech-stack"><i class="fas fa-microchip"></i> Cisco Packet Tracer, VLANs, OSPF, IPsec VPN</div>
             <div>Designed secure network with VLAN segmentation, site‑to‑site IPsec VPN, and router‑on‑a‑stick. Chose OSPF over RIP for faster convergence.</div>
             <div class="button-group">
@@ -205,9 +206,9 @@
             </div>
           </div>
 
-          <!-- 6. E‑commerce Database & Sales Prediction (SCDV45) -->
+          <!-- 6. E‑commerce Database (SCDV45) -->
           <div class="project-item">
-            <div class="project-title"><i class="fas fa-chart-line"></i> E‑commerce Database & Sales Prediction (SCDV45 University)</div>
+            <div class="project-title"><i class="fas fa-chart-line"></i> E‑commerce Database & Sales Prediction (SCDV45)</div>
             <div class="tech-stack"><i class="fas fa-database"></i> MySQL, Python, Pandas, scikit‑learn, SQLAlchemy</div>
             <div>Designed a relational database (Customers, Products, Orders – 50+ rows). Wrote advanced SQL queries (window functions, subqueries). Built a linear regression model (R²=0.997) to predict order value.</div>
             <div class="button-group">
@@ -218,26 +219,18 @@
 
           <!-- Journal Teaser -->
           <div class="project-item journal-teaser">
-            <div class="project-title">
-              <i class="fas fa-book-open"></i> Latest from my Journal
-            </div>
-            <div class="tech-stack">
-              <i class="fas fa-pen-fancy"></i> Professional reflections
-            </div>
+            <div class="project-title"><i class="fas fa-book-open"></i> Latest from my Journal</div>
+            <div class="tech-stack"><i class="fas fa-pen-fancy"></i> Professional reflections</div>
             <div>
               <p><strong>Read my latest entry:</strong><br> "Deploying a custom domain on Railway – 24 May 2026"</p>
-              <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-secondary);">
-                Click to view all 11 journal entries →
-              </p>
+              <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-secondary);">Click to view all 11 journal entries →</p>
             </div>
             <div class="button-group">
-              <a href="/journal" class="btn-view">
-                <i class="fas fa-book-open"></i> Read full journal
-              </a>
+              <a href="/journal" class="btn-view"><i class="fas fa-book-open"></i> Read full journal</a>
             </div>
           </div>
 
-        </div> <!-- end key projects section -->
+        </div> <!-- end section -->
       </div> <!-- end right-col -->
     </div> <!-- end two-col -->
 
@@ -253,35 +246,31 @@
   </div>
 </div>
 
-
 <!-- Scratch Card Modal Overlay -->
 <div id="scratch-card-wrapper" class="modal-overlay" style="display: none;">
   <div class="scratch-modal-container">
     <div class="scratch-instruction">
-      </i> Scratch the card to reveal my GitHub profile <i class="fas fa-mouse-pointer"></i>
+      <i class="fas fa-hand-peace"></i> Scratch the card to reveal my GitHub profile <i class="fas fa-mouse-pointer"></i>
     </div>
     <div class="scratch-card-container">
       <div class="premium-card" id="interactive-card">
         <div class="card-glow"></div>
         <img class="card-bg-image" src="images/gitscreenshot.png" alt="GitHub Profile">
         <div class="card-pattern"></div>
-        
         <div class="card-header">
           <span class="meta-left">JJ</span>
           <span class="meta-right">GitHub Profile</span>
         </div>
-        
         <div class="card-footer">
           <div class="footer-block">
-            <div class="meta-label">MY GitHub Commits!</div>
+            <div class="meta-label">MY WORK</div>
             <div class="meta-value">github.com/JackUCS</div>
           </div>
           <div class="footer-block text-right">
             <div class="meta-label">STATUS</div>
-            <div class="meta-value">Click → View my GitHub profile</div>
+            <div class="meta-value">Scratch → Unlock</div>
           </div>
         </div>
-        
         <canvas id="scratch-canvas" class="scratch-surface"></canvas>
       </div>
     </div>
@@ -297,7 +286,7 @@
       <hr>
       <div class="journal-preview">
         <p><strong>24 May 2026 – Deploying a custom domain on Railway</strong></p>
-        <p>Getting <code>jackcv.xyz</code> live was harder than expected. I had to configure CNAME and TXT records on Namecheap...</p>
+        <p>Getting <code>jackcv.xyz</code> live was harder than expected...</p>
       </div>
       <div class="button-group" style="margin-top: 1rem;">
         <a href="/journal" class="btn-view">Read full journal →</a>
@@ -305,14 +294,14 @@
     </div>
   </div>
 </div>
-<!-- Scratch sound effect (hidden) -->
-<audio id="scratch-sound" preload="auto" style="display: none;">
-  <source src="images/sounds\Scratch.mp3" type="audio/mp3">
-</audio>
 
-<!-- Reward sound (plays when card is fully scratched) -->
+<!-- Audio elements -->
+<audio id="scratch-sound" preload="auto" style="display: none;">
+  <source src="images/sounds/Scratch.mp3" type="audio/mpeg">
+</audio>
 <audio id="reward-sound" preload="auto" style="display: none;">
   <source src="images/sounds/rewardBig.mp3" type="audio/mpeg">
 </audio>
+
 </body>
 </html>

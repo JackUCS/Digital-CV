@@ -1278,3 +1278,15 @@ ul li::before {
   box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6),
               0 0 0 1px rgba(79, 158, 255, 0.2);
 }
+/* Cursor spotlight effect – full site */
+.cursor-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(79, 158, 255, 0.12), transparent 70%);
+  transition: background 0.05s linear;
+}
